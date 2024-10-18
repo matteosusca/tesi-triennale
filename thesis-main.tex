@@ -41,7 +41,7 @@ Optional. Max a few lines.
 % \lstlistoflistings % (optional) comment if empty
 %----------------------------------------------------------------------------------------
 
-% \mainmatter
+\mainmatter
 
 %----------------------------------------------------------------------------------------
 \chapter{Introduzione}
@@ -75,7 +75,34 @@ Con l'introduzione e aumento di sistemi operativi con interfaccia grafica, era i
 In questo capitolo analizzeremo alcune delle principali tecnologie di desktop remoto presentando il contesto storico in cui sono state sviluppate, le caratteristiche principali e il funzionamento.
 
 \subsection{X Window System}
-Nel 1984 viene presentato dal Massachusetts Institute of Technology il X Window System, successore del W Window System. Il sistema X si basa su una archittettura client-server dove il server è il computer che ospita l'interfaccia grafica e il client è il computer che si connette al server per visualizzare l'interfaccia grafica.
+L'X Window System, noto anche come X o X11, è un sistema di finestre che consente di eseguire applicazioni grafiche localmente o su computer remoti tramite una archittettura client-server.
+Nasce dall'esigenza comune di due progetti del MIT, Athena e il Laboratory for Computer Science, di avere un sistema che permettesse di accedere a risorse grafiche distribuite su una rete di computer eterogenei, indipendentemente dall'hardware o dal sistema operativo utilizzato.
+Il nome "X" deriva dal suo predecessore, il W Window System, sviluppato presso l'Università di Stanford. A differenza del W Window System, X introduceva la possibilità di gestire applicazioni grafiche su workstation remote, favorendo il concetto di separazione client-server per l'accesso ai display.
+
+La versione attuale di X è la X11, rilasciata nel 1987. Questa versione è ancora ampiamente utilizzata e supportata, nonostante siano state sviluppate versioni successive come X.Org e XFree86.
+
+\subsubsection{Architettura del sistema}
+% fonte: https://www.maketecheasier.com/the-x-window-system/ e wikipedia
+
+X è una collezione di software che si posizionano tra l'hardware (o per meglio dire il kernel) e altri software di più alto livello detti X-clients. Il sistema X si basa su una archittettura client-server dove il server si trova sul compute che ospita l'interfaccia grafica e il client è l'applicazione che richiede servizi grafici. Questa terminologia può sembrare controintuitiva in quanto chi non ha familiarità con il sistema X potrebbe pensare che sia invertita. In realtà X si mette nei panni delle applicazioni che richiedono servizi grafici e I/O al server X (che appunto interagisce con l'hardware).
+I client possono essere locali o remoti. Ogni server X può connettersi a molteplici client 
+% immagine architettura X Window System
+
+\subsubsection{Funzionamento generale}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus nec nunc ultricies tincidunt. Nullam nec purus nec nunc ultricies tincidunt. Nullam nec purus nec nunc
+
+\subsubsection{Desktop remoto in X Window System}
+
+La comunicazione tra server a client avviene in modalità full-duplex, ovvero entrambi possono inviare e ricevere dati contemporaneamente. Lo scambio di messaggi avviene """canonicamente""" attraverso il protocollo TCP/IP, ma spesso vengono utilizzati altri canali comunicativi come Unix domain sockets o memoria condivisa. Indipendentemente dal canale utilizzato è necessario che questo sia affidabile e che garantisca l'integrità e l'ordine dei messaggi, il protocollo X non implementa nativamente meccanismi di ritrasmissione o riordino dei pacchetti.
+
+\begin{thebibliography}{9}
+\bibitem{scheifler1986x} 
+Robert W. Scheifler and Jim Gettys, 
+\textit{The X Window System}, 
+MIT Laboratory for Computer Science, Digital Equipment Corporation, 1986.
+\end{thebibliography}
+
 
 \subsection{Remote Desktop Protocol}
 
