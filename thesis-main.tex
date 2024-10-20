@@ -70,9 +70,7 @@ Ovviamente ai giorni nostri, in molti casi, non basta più accedere solamente al
 Negli anni '80 esistavo già tecnologie che permettevano di accedere ad un terminale remoto da una macchina locale. Esistevano macchine adibite solamente alla connessione con un terminale remoto; queste macchine erano chiamate "dumb terminal" (terminale stupido) o "thin client". Quest'ultimo termine è ancora utilizzato oggi per indicare un dispositivo che si connette ad un server remoto per eseguire applicazioni e accedere a risorse di rete.
 Con l'introduzione e aumento di sistemi operativi con interfaccia grafica, era inevitabile la conseguente evoluzione delle tecnologie di accesso remoto. Fu infatti nel 1984 che fu introdotto, dal Massachusetts Institute of Technology, il X Window System, successore del W Window System.
 
-
-\section{Analisi e Funzionamento delle Principali Tecnologie di Desktop Remoto}
-In questo capitolo analizzeremo alcune delle principali tecnologie di desktop remoto presentando il contesto storico in cui sono state sviluppate, le caratteristiche principali e il funzionamento.
+\section{Analisi e Funzionamento delle Principali Tecnologie di Desktop Remoto} 
 
 \subsection{X Window System}
 L'X Window System, noto anche come X o X11, è un sistema di finestre che consente di eseguire applicazioni grafiche localmente o su computer remoti tramite una archittettura client-server.
@@ -81,27 +79,48 @@ Il nome "X" deriva dal suo predecessore, il W Window System, sviluppato presso l
 
 La versione attuale di X è la X11, rilasciata nel 1987. Questa versione è ancora ampiamente utilizzata e supportata, nonostante siano state sviluppate versioni successive come X.Org e XFree86.
 
-\subsubsection{Architettura del sistema}
+\paragraph{Architettura del sistema}
 % fonte: https://www.maketecheasier.com/the-x-window-system/ e wikipedia
 
-X è una collezione di software che si posizionano tra l'hardware (o per meglio dire il kernel) e altri software di più alto livello detti X-clients. Il sistema X si basa su una archittettura client-server dove il server si trova sul compute che ospita l'interfaccia grafica e il client è l'applicazione che richiede servizi grafici. Questa terminologia può sembrare controintuitiva in quanto chi non ha familiarità con il sistema X potrebbe pensare che sia invertita. In realtà X si mette nei panni delle applicazioni che richiedono servizi grafici e I/O al server X (che appunto interagisce con l'hardware).
-I client possono essere locali o remoti. Ogni server X può connettersi a molteplici client 
+X è una collezione di software che si posizionano tra l'hardware (o per meglio dire il kernel) e altri software di più alto livello detti X-clients. Il sistema X si basa su una archittettura client-server dove il server si trova sul computer che ospita l'interfaccia grafica e il client è l'applicazione che richiede servizi grafici. Questa terminologia può sembrare controintuitiva in quanto chi non ha familiarità con il sistema X potrebbe pensare che sia invertita. In realtà X si mette nei panni delle applicazioni che richiedono servizi grafici e I/O al server X (che appunto interagisce con l'hardware).
+I client possono essere locali o remoti. Ogni server X può connettersi a molteplici client.
 % immagine architettura X Window System
 
-\subsubsection{Funzionamento generale}
+\paragraph{Funzionamento generale}
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus nec nunc ultricies tincidunt. Nullam nec purus nec nunc ultricies tincidunt. Nullam nec purus nec nunc
 
-\subsubsection{Desktop remoto in X Window System}
+\paragraph{Desktop remoto in X Window System}
 
-La comunicazione tra server a client avviene in modalità full-duplex, ovvero entrambi possono inviare e ricevere dati contemporaneamente. Lo scambio di messaggi avviene """canonicamente""" attraverso il protocollo TCP/IP, ma spesso vengono utilizzati altri canali comunicativi come Unix domain sockets o memoria condivisa. Indipendentemente dal canale utilizzato è necessario che questo sia affidabile e che garantisca l'integrità e l'ordine dei messaggi, il protocollo X non implementa nativamente meccanismi di ritrasmissione o riordino dei pacchetti.
+La comunicazione tra server a client avviene in modalità full-duplex, ovvero entrambi possono inviare e ricevere dati contemporaneamente. Lo scambio di messaggi avviene """canonicamente""" attraverso il protocollo TCP/IP, ma spesso vengono utilizzati altri canali comunicativi come Unix domain sockets o memoria condivisa. Indipendentemente dal canale utilizzato è necessario che questo sia affidabile e che garantisca l'integrità e l'ordine dei messaggi in quanto il protocollo X non implementa nativamente meccanismi di ritrasmissione o riordino dei pacchetti.
 
-\begin{thebibliography}{9}
-\bibitem{scheifler1986x} 
-Robert W. Scheifler and Jim Gettys, 
-\textit{The X Window System}, 
-MIT Laboratory for Computer Science, Digital Equipment Corporation, 1986.
-\end{thebibliography}
+Quando un client si connette a un server X, avviene una fase di handshake che stabilisce la connessione e verifica l'autenticazione del client. Successivamente, il client può inviare richieste al server, come la creazione di finestre, il disegno di elementi grafici, o la gestione dell'input. Le richieste vengono accumulate in un buffer e inviate in modo asincrono per migliorare l'efficienza della comunicazione. Il server gestisce le richieste di più client contemporaneamente, garantendo l'isolamento tra loro, ma non fornisce alcuna garanzia di ordinamento tra client differenti, a meno che non venga esplicitamente richiesto \cite{coopersmith2024x}.
+
+Anche se non è stato progettato principalmente per quello, la natura client-server del protocollo X permette di utilizzarlo per il desktop remoto. Infatti, un client può essere eseguito su un computer remoto, mentre il server X gestisce il display su una macchina locale.
+
+A differenza di altri protocolli che vedremo in seguito, il protocollo X non prevede un meccanismo di compressione dei dati, il che può comportare un aumento del traffico di rete e una riduzione delle prestazioni in caso di connessioni lente o instabili. Inoltre tutta la parte di rendering grafico è demandata al computer locale su richiesta del client.
+
+\paragraph{Esempio di utilizzo di X Window System}
+
+Per comprendere meglio il funzionamento del X Window System in un contesto di desktop remoto, consideriamo un esempio concreto: l'esecuzione dell'applicazione di editing testuale gedit su un server remoto e la sua visualizzazione su un computer locale. Questo può essere realizzato attraverso il X forwarding con ssh, utilizzando il seguente comando:
+
+\begin{verbatim}
+ssh -X user@remote_server
+\end{verbatim}
+
+Dopo aver inserito le credenziali e stabilito la connessione, possiamo avviare l'applicazione da linea di comando come avremmo fatto normalmente:
+
+\begin{verbatim}
+gedit &
+\end{verbatim}
+
+\paragraph{Funzionamento del protocollo}
+
+Quando viene eseguito il comando \texttt{ssh -X}, il client e il server X avviano una procedura di handshake per stabilire il canale di comunicazione sicuro. Il server X verifica che il client abbia i permessi necessari per connettersi al display locale e, se tutto è corretto, il client e il server negoziano parametri di comunicazione come il byte-ordering, che permette di gestire correttamente i dati tra macchine con architetture diverse.
+
+Dopo il completamento dell'handshake e la negoziazione dei parametri, il client remoto \texttt{gedit} invia richieste al server X locale per creare finestre, disegnare interfacce grafiche e gestire l'input dell'utente. Queste richieste vengono trasmesse attraverso il tunnel \texttt{ssh}. Il client chiede inoltre al server X di intercettare gli eventi di input, come la pressione di un tasto o il movimento del mouse, e di inoltrarli al client remoto. Quindi, quando l'utente interagisce con \texttt{gedit} (ad esempio digitando del testo o muovendo il mouse), il server X cattura questi eventi e li inoltra al client remoto tramite il protocollo X11. Il client elabora gli eventi e, se necessario, invia aggiornamenti grafici che vengono visualizzati sul display locale \cite{coopersmith2024x}.
+
+Questo flusso di comunicazione è gestito in modo asincrono, permettendo al server di accumulare richieste in un buffer e processarle in modo efficiente, ottimizzando così l'uso della rete.
 
 
 \subsection{Remote Desktop Protocol}
