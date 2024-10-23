@@ -124,11 +124,28 @@ Dopo che l'handshake e la negoziazione dei parametri sono stati conclusi, il cli
 
 Questo flusso di comunicazione è gestito in modo asincrono, permettendo al server di accumulare richieste in un buffer e processarle in modo efficiente, ottimizzando così l'uso della rete.
 
-\subsection{Citrix XenDesktop}
 
-\subsection{Remote Desktop Protocol}
 
 \subsection{Virtual Network Computing}
+
+Il protocollo Virtual Network Computing (VNC) è uno dei protocolli più diffusi per il desktop remoto. È stato sviluppato da Olivetti \& Oracle Research Laboratory nel 1998.
+Viene sviluppato per utilizzo interno al laboratorio per poter accedere a workstation da diversi dispositivi in luoghi diversi, anche esterni al laboratorio. Nonostante X Window System permettesse già di fare ciò, richiedeva che nel dispositivo remoto fosse installato un server X, che risultava pesante da eseguire per dispositivi poco potenti. Inoltre il sistema X era strettamente legato al sistema operativo Unix.
+VNC invece è stato progettato per essere indipendente dal sistema operativo e per essere leggero, permettendo di eseguire un server VNC su qualsiasi dispositivo, anche poco potente, e di accedervi da qualsiasi altro dispositivo con un client VNC.
+L'architettura di VNC si basava su un'idea chiave: rendere il client estremamente "sottile", eliminando la necessità di mantenere stati complessi sul dispositivo client. Questo garantiva una facile disconnessione e riconnessione da qualsiasi dispositivo senza influenzare il server o l'ambiente desktop.
+
+\subsubsection{Architettura e funzionamento}
+La tecnologia alla base del sistema VNC è il protocollo Remote Frame Buffer (RFB). Opera a livello di framebuffer e per questo motivo può essere utilizzato con qualsiasi sistema operativo.
+Il sistema VNC è composto da due componenti principali: il server VNC e il client VNC. Il server è il punto in cui avvengono le modifiche al framebuffer e dove si trovano il sistema di finestre e le applicazioni. Il client è l'endpoint con cui l'utente interagisce attraverso un display e dispositivi di input.
+
+\paragraph{Rendering grafico}
+Al livello base il sistema VNC utilizza un'unica primitiva grafica:
+\begin{quote}
+    "Posiziona un rettangolo di dati di pixel in una determinata posizione x, y."
+\end{quote}
+
+Questo sistema puo sembrare inefficente ma cio che vnc vuole fare è riciclare dati già presenti sullo schermo del client. ad esempio se una finestra viene spostata da una parte all0altra del desktop, il server vnc chiederà solamente di spostare il rettangolo di dimensione della finestra dalla posizione x1 y1 alla posizione x2 y2. Questo, affiancato a tecniche di compressione dei dati, permette di ridurre notevolmente la quantità di dati da trasmettere.
+
+\subsection{Remote Desktop Protocol}
 
 \subsection{...}
 
