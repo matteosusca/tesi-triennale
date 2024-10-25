@@ -8,7 +8,7 @@
 
 \school{\unibo}
 \programme{Corso di Laurea Triennale in Ingegneria e Scienze Informatiche}
-\title{Tecnologie di Desktop Remoto e il loro Funzionamento}
+\title{Evoluzione delle Tecnologie di Desktop Remoto}
 \author{Matteo Susca}
 \date{\today}
 \subject{Reti di Telecomunicazioni}
@@ -74,7 +74,7 @@ Con l'introduzione e aumento di sistemi operativi con interfaccia grafica, era i
 
 \subsection{X Window System}
 X Window System, noto anche come X o X11, è un sistema di finestre che consente di eseguire applicazioni grafiche localmente o su computer remoti tramite una architettura client-server. 
-Nasce dall'esigenza comune di due progetti del MIT, Athena e il Laboratory for Computer Science, di avere un sistema che permettesse di accedere a risorse grafiche distribuite su una rete di workstation eterogenee, indipendentemente dall'hardware o dal sistema operativo utilizzato \cite{scheifler1986x}. 
+Nasce dall'esigenza comune di due progetti del MIT, Athena e il Laboratory for Computer Science, di avere un sistema che permettesse di accedere a risorse grafiche distribuite su una rete di workstation eterogenee, indipendentemente dall'hardware o dal sistema operativo utilizzato \cite{Scheifler1986}. 
 Il nome "X" deriva dal suo predecessore, W Window System, sviluppato presso l'Università di Stanford. A differenza di W Window System, X permetteva di gestire applicazioni grafiche su workstation remote, favorendo il concetto di separazione client-server per l'accesso ai display.
 
 La versione attuale di X è la X11, rilasciata nel 1987. Questa versione è stata estesa ulteriormente negli ultimi anni ma il suo funzionamento di base è rimasto invariato e compatibile con le versioni precedenti.
@@ -82,7 +82,7 @@ La versione attuale di X è la X11, rilasciata nel 1987. Questa versione è stat
 \paragraph{Architettura e Desktop Remoto}
 % fonte: https://www.maketecheasier.com/the-x-window-system/ e wikipedia
 
-X è una collezione di software che si posizionano tra l'hardware (o per meglio dire il kernel) e altri software di più alto livello detti X-clients. X si basa su una architettura client-server dove il server è in esecuzione sulla macchina che ospita l'interfaccia grafica e il client è l'applicazione che richiede servizi grafici \cite{scheifler1986x}. Questa terminologia può sembrare controintuitiva in quanto chi non ha familiarità con il sistema X potrebbe pensare che sia invertita. In realtà il tutto deve essere visto dal punto di vista delle applicazioni: queste richiedono servizi grafici e I/O al server X.
+X è una collezione di software che si posizionano tra l'hardware (o per meglio dire il kernel) e altri software di più alto livello detti X-clients. X si basa su una architettura client-server dove il server è in esecuzione sulla macchina che ospita l'interfaccia grafica e il client è l'applicazione che richiede servizi grafici \cite{Scheifler1986}. Questa terminologia può sembrare controintuitiva in quanto chi non ha familiarità con il sistema X potrebbe pensare che sia invertita. In realtà il tutto deve essere visto dal punto di vista delle applicazioni: queste richiedono servizi grafici e I/O al server X.
 I client possono essere locali o remoti. Ogni server X può connettersi a molteplici client.
 % immagine architettura X Window System
 \begin{figure}
@@ -92,9 +92,9 @@ I client possono essere locali o remoti. Ogni server X può connettersi a moltep
 \end{figure}
 \footnotetext{Fonte: \url{https://commons.wikimedia.org/wiki/File:X_client_server_example.svg}}
 
-La comunicazione tra server e client avviene in modalità full-duplex, ovvero entrambi possono inviare e ricevere dati contemporaneamente. Lo scambio di messaggi avviene tramite il protocollo TCP/IP, ma spesso vengono utilizzati altri canali comunicativi come Unix domain sockets o memoria condivisa \cite{coopersmith2024x}. Indipendentemente dal canale utilizzato, è necessario che questo sia affidabile e che garantisca l'integrità e l'ordine dei messaggi, in quanto il protocollo X non implementa nativamente meccanismi di ritrasmissione o di ordinamento dei pacchetti.
+La comunicazione tra server e client avviene in modalità full-duplex, ovvero entrambi possono inviare e ricevere dati contemporaneamente. Lo scambio di messaggi avviene tramite il protocollo TCP/IP, ma spesso vengono utilizzati altri canali comunicativi come Unix domain sockets o memoria condivisa \cite{xDevGuide}. Indipendentemente dal canale utilizzato, è necessario che questo sia affidabile e che garantisca l'integrità e l'ordine dei messaggi, in quanto il protocollo X non implementa nativamente meccanismi di ritrasmissione o di ordinamento dei pacchetti.
 
-Quando un client si connette a un server X, avviene una fase di handshake che stabilisce la connessione e verifica l'autenticazione del client. Successivamente, il client può inviare richieste al server, come la creazione di finestre, il disegno di elementi grafici, o la gestione dell'input. Le richieste vengono accumulate in un buffer e inviate in modo asincrono per migliorare l'efficienza della comunicazione. Il server gestisce le richieste di più client contemporaneamente, garantendo l'isolamento tra loro, ma non fornisce alcuna garanzia di ordinamento tra client differenti, a meno che non venga esplicitamente richiesto \cite{coopersmith2024x}.
+Quando un client si connette a un server X, avviene una fase di handshake che stabilisce la connessione e verifica l'autenticazione del client. Successivamente, il client può inviare richieste al server, come la creazione di finestre, il disegno di elementi grafici, o la gestione dell'input. Le richieste vengono accumulate in un buffer e inviate in modo asincrono per migliorare l'efficienza della comunicazione. Il server gestisce le richieste di più client contemporaneamente, garantendo l'isolamento tra loro, ma non fornisce alcuna garanzia di ordinamento tra client differenti, a meno che non venga esplicitamente richiesto \cite{xDevGuide}.
 
 A differenza di altri protocolli progettati specificamente per il desktop remoto, X è stato sviluppato principalmente per l'esecuzione remota di singole applicazioni grafiche, piuttosto che per la gestione completa di un ambiente desktop (Desktop Environment, DE). Per eseguire un intero DE in remoto, sarebbe necessario ricorrere a software aggiuntivi come X2Go.
 
@@ -118,32 +118,42 @@ gedit &
 
 \paragraph{Funzionamento del protocollo}
 
-Quando viene eseguito il comando \Cref{lst:ssh-x}, il client e il server X avviano una procedura di handshake per stabilire il canale di comunicazione sicuro. Il server X verifica che il client abbia i permessi necessari per connettersi al display locale e, se tutto è corretto, il client e il server negoziano parametri di comunicazione come il byte-ordering, che permette di gestire correttamente i dati tra macchine con architetture diverse \cite{coopersmith2024x}.
+Quando viene eseguito il comando \Cref{lst:ssh-x}, il client e il server X avviano una procedura di handshake per stabilire il canale di comunicazione sicuro. Il server X verifica che il client abbia i permessi necessari per connettersi al display locale e, se tutto è corretto, il client e il server negoziano parametri di comunicazione come il byte-ordering, che permette di gestire correttamente i dati tra macchine con architetture diverse \cite{xDevGuide}.
 
-Dopo che l'handshake e la negoziazione dei parametri sono stati conclusi, il client remoto \texttt{gedit} invia richieste al server X locale per creare finestre, disegnare interfacce grafiche e gestire l'input dell'utente. Queste richieste vengono trasmesse attraverso il tunnel \texttt{ssh}. Il client chiede inoltre al server X di intercettare gli eventi di input, come la pressione di un tasto o il movimento del mouse, e di inoltrarli al client remoto. Quindi, quando l'utente interagisce con \texttt{gedit} (ad esempio digitando del testo o muovendo il mouse), il server X cattura questi eventi e li inoltra al client remoto tramite il protocollo X11. Il client elabora gli eventi e, se necessario, invia aggiornamenti grafici che vengono visualizzati sul display locale \cite{coopersmith2024x}.
+Dopo che l'handshake e la negoziazione dei parametri sono stati conclusi, il client remoto \texttt{gedit} invia richieste al server X locale per creare finestre, disegnare interfacce grafiche e gestire l'input dell'utente. Queste richieste vengono trasmesse attraverso il tunnel \texttt{ssh}. Il client chiede inoltre al server X di intercettare gli eventi di input, come la pressione di un tasto o il movimento del mouse, e di inoltrarli al client remoto. Quindi, quando l'utente interagisce con \texttt{gedit} (ad esempio digitando del testo o muovendo il mouse), il server X cattura questi eventi e li inoltra al client remoto tramite il protocollo X11. Il client elabora gli eventi e, se necessario, invia aggiornamenti grafici che vengono visualizzati sul display locale \cite{xDevGuide}.
 
 Questo flusso di comunicazione è gestito in modo asincrono, permettendo al server di accumulare richieste in un buffer e processarle in modo efficiente, ottimizzando così l'uso della rete.
 
-
-
 \subsection{Virtual Network Computing}
 
-Il protocollo Virtual Network Computing (VNC) è uno dei protocolli più diffusi per il desktop remoto. È stato sviluppato da Olivetti \& Oracle Research Laboratory nel 1998.
-Viene sviluppato per utilizzo interno al laboratorio per poter accedere a workstation da diversi dispositivi in luoghi diversi, anche esterni al laboratorio. Nonostante X Window System permettesse già di fare ciò, richiedeva che nel dispositivo remoto fosse installato un server X, che risultava pesante da eseguire per dispositivi poco potenti. Inoltre il sistema X era strettamente legato al sistema operativo Unix.
-VNC invece è stato progettato per essere indipendente dal sistema operativo e per essere leggero, permettendo di eseguire un server VNC su qualsiasi dispositivo, anche poco potente, e di accedervi da qualsiasi altro dispositivo con un client VNC.
-L'architettura di VNC si basava su un'idea chiave: rendere il client estremamente "sottile", eliminando la necessità di mantenere stati complessi sul dispositivo client. Questo garantiva una facile disconnessione e riconnessione da qualsiasi dispositivo senza influenzare il server o l'ambiente desktop.
+Il protocollo Virtual Network Computing (VNC) è uno dei più diffusi per l'accesso remoto al desktop. Sviluppato presso il laboratorio di ricerca Olivetti \& Oracle Research Laboratory nel 1998, VNC è stato inizialmente progettato per consentire l'accesso alle workstation da diversi dispositivi, sia all'interno che all'esterno del laboratorio \cite{richardson1998vnc}. Sebbene X Window System offrisse già funzionalità simili, richiedeva che il dispositivo remoto eseguisse un server X, che risultava spesso troppo oneroso per dispositivi con capacità di elaborazione limitate. Inoltre, X Window System era strettamente legato all'ambiente Unix \cite{richardson1998vnc}.
+
+VNC, al contrario, è stato concepito per essere indipendente dal sistema operativo e per garantire leggerezza nell'esecuzione. Questo rende possibile la sua implementazione su qualsiasi dispositivo e l'accesso da qualunque altro dispositivo dotato di un client VNC, anche poco potente. Una delle caratteristiche chiave di VNC è la semplicità del client, che non mantiene stati complessi, permettendo una facile disconnessione e riconnessione senza compromettere lo stato del server o l'ambiente desktop \cite{richardson1998vnc}.
 
 \subsubsection{Architettura e funzionamento}
-La tecnologia alla base del sistema VNC è il protocollo Remote Frame Buffer (RFB). Opera a livello di framebuffer e per questo motivo può essere utilizzato con qualsiasi sistema operativo.
-Il sistema VNC è composto da due componenti principali: il server VNC e il client VNC. Il server è il punto in cui avvengono le modifiche al framebuffer e dove si trovano il sistema di finestre e le applicazioni. Il client è l'endpoint con cui l'utente interagisce attraverso un display e dispositivi di input.
+
+Alla base del sistema VNC si trova il protocollo Remote Framebuffer (RFB) \cite{wikipediaVNC}, che opera a livello di framebuffer, rendendolo compatibile con qualsiasi sistema operativo, sistema di finestre o applicazione. Il sistema VNC è composto principalmente da due componenti: il server VNC e il client VNC. Il server è responsabile delle modifiche al framebuffer e ospita il sistema di finestre e le applicazioni, mentre il client rappresenta l'endpoint con cui l'utente interagisce attraverso il display e i dispositivi di input \cite{richardson1998vnc}.
 
 \paragraph{Rendering grafico}
-Al livello base il sistema VNC utilizza un'unica primitiva grafica:
+
+Il sistema VNC utilizza un metodo di rendering molto semplice, basato su una singola operazione grafica:
 \begin{quote}
     "Posiziona un rettangolo di dati di pixel in una determinata posizione x, y."
 \end{quote}
+Questo approccio, pur sembrando inefficiente a prima vista, offre grande flessibilità grazie all'uso di diversi schemi di codifica dei dati grafici.
+Ad esempio il server può ottimizzare la trasmissione di dati riciclando informazioni già presenti sullo schermo del client. Se una finestra viene spostata da una posizione all'altra sul desktop, il server VNC invierà semplicemente una richiesta per spostare il rettangolo corrispondente dalla posizione iniziale (\texttt{x1, y1}) alla nuova posizione (\texttt{x2, y2}). Inoltre, VNC utilizza tecniche di compressione dei dati per ridurre significativamente la quantità di informazioni da trasmettere.
 
-Questo sistema puo sembrare inefficente ma cio che vnc vuole fare è riciclare dati già presenti sullo schermo del client. ad esempio se una finestra viene spostata da una parte all0altra del desktop, il server vnc chiederà solamente di spostare il rettangolo di dimensione della finestra dalla posizione x1 y1 alla posizione x2 y2. Questo, affiancato a tecniche di compressione dei dati, permette di ridurre notevolmente la quantità di dati da trasmettere.
+Un insieme di rettangoli di pixel modificati viene definito "framebuffer update". Ogni rettangolo può essere codificato in modo diverso, consentendo al server di scegliere il metodo di codifica più efficiente in base alla situazione. A differenza di un frame video completo, un aggiornamento del framebuffer riguarda solo la porzione di schermo modificata. Gli aggiornamenti vengono inviati in modo asincrono: il server invia nuovi aggiornamenti solo quando è necessario; questo consente di adattare la frequenza degli aggiornamenti in base agli eventi sullo schermo, alla velocità della rete e alle capacità del client \cite{richardson1998vnc}.
+
+Ad esempio, se l'utente trascina una finestra su una connessione veloce con un client potente, gli aggiornamenti saranno continui e fluidi. In caso di connessione lenta o client con risorse limitate, il server ridurrà la frequenza degli aggiornamenti, causando un movimento meno fluido.
+
+\paragraph{Input}
+
+VNC supporta un modello standard di input che include una tastiera e un dispositivo di puntamento multi-pulsante. Il client invia eventi di input ogni volta che un tasto viene premuto o il mouse viene mosso, permettendo al server di elaborare questi eventi e aggiornare l'interfaccia di conseguenza. \cite{richardson1998vnc}.
+
+\paragraph{Connessione e autenticazione}
+
+Quando un client richiede la connessione a un server VNC, il server risponde con una richiesta di autenticazione, generalmente basata su un meccanismo di password \textit{challenge-response}. Una volta autenticato, client e server negoziano parametri come la risoluzione dello schermo, il formato dei pixel, i metodi di codifica supportati e altre impostazioni. Dopo la negoziazione, la sessione viene avviata e il client richiede il primo aggiornamento del framebuffer \cite{richardson1998vnc}.
 
 \subsection{Remote Desktop Protocol}
 
@@ -179,16 +189,7 @@ Questo sistema puo sembrare inefficente ma cio che vnc vuole fare è riciclare d
 \nocite{*} % Remove this as soon as you have the first citation
 
 \bibliographystyle{alpha}
-\bibliography{bibliography}
-
-\begin{thebibliography}{9}
-    \bibitem{scheifler1986x} 
-    R. W. Scheifler and J. Gettys, \textit{The X Window System}, MIT Laboratory for Computer Science, Digital Equipment Corporation, 1986.
-    
-    \bibitem{coopersmith2024x} 
-    A. Coopersmith, \textit{The X New Developer’s Guide: Communication Between Client and Server}, X.org, 2024.
-\end{thebibliography}
-    
+\bibliography{bibliography}    
 
 \begin{acknowledgements} % this is optional
 Optional. Max 1 page.
