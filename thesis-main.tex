@@ -157,6 +157,47 @@ Quando un client richiede la connessione a un server VNC, il server risponde con
 
 \subsection{Remote Desktop Protocol}
 
+Remote Desktop Protocol (RDP) è un protocollo proprietario sviluppato da Microsoft per l'accesso remoto a sistemi Windows. Viene introdotto nel 1998 con Windows NT 4.0 Terminal Server Edition e successivamente integrato in tutte le versioni successive di Windows (ad eccezione delle versioni Home).
+
+\subsubsection{Il Protocollo}
+Al suo interno lo stack RDP è composto da diversi protocolli, ognuno con un compito specifico.
+\begin{itemize}
+    \item \textbf{TPKT}: Anche conosciuto come ISO Transport Service on top of the TCP (RFC 1006), è un protocollo di trasporto che fornisce un servizio di trasporto orientato alla connessione. Permette lo scambio di unità di dati Transport Protocol Data Units (TPDU) tra due host.
+    \item \textbf{X.224}: Protocollo di livello di trasporto che fornisce servizi di sessione e di connessione. Gestisce le richieste e risposte di connessione.
+    \item \textbf{T.125 MCS}: Protocollo che permette ad RDP di gestire e comunicare attraverso più canali di comunicazione.
+\end{itemize}
+
+L'attività di invio e ricezione dei dati tramite lo stack RDP segue essenzialmente lo stesso schema del modello OSI a sette livelli, comune nelle reti LAN. I dati di un'applicazione o servizio vengono segmentati, indirizzati a un canale, crittografati, incapsulati e impacchettati nel protocollo di rete, per poi essere inviati al client. I dati ricevuti subiscono il processo inverso: vengono decapsulati, decrittografati e, infine, resi disponibili all'applicazione. \cite{microsoftRDP}
+
+\subsubsection{Connessione}
+
+La fase di connessione può essere suddivisa nelle seguenti fasi:
+\begin{enumerate}
+    \item \textbf{Inizializazione della connessione}: Il client invia un PDU di richiesta di connessione utilizzando il protocollo X.224. Il server risponde con un PDU di conferm di connessione. In questa fase viene stabilito il protocollo di sicurezza da utilizzare.
+    \item \textbf{Scambio delle Impostazioni di Base}: Tramite MCS Connect Initial PDU e MCS Connect Response PDU, client e server scambiano informazioni di base come la versione del protocollo, la dimesione del desktop, dati riguardanti la sicurezza come il server random e il certificato e informazioni di rete come il numero di canali supportati.
+    \item \textbf{Connessione dei Canali}: Il client e il server stabiliscono le connessioni individuali per ogni canale virtuale previsto nella sessione, tramite una serie di richieste e conferme.
+    \item \textbf{Avvio della Sicurezza}: Il client invia un PDU di scambio di sicurezza contenente un numero casuale cifrato, utile per generare le chiavi di sessione. Da questo punto, il traffico RDP può essere cifrato.
+    \item \textbf{Scambio delle Impostazioni di Sicurezza}: Il client invia un PDU criptato contenente informazioni di configurazione come username, dominio e opzioni di compressione supportate.
+    \item \textbf{Verifica della Licenza}: Questa fase verifica se il client è autorizzato a connettersi a un terminal server con un numero maggiore di connessioni simultanee. Se il server non ha una licenza configurata, consente fino a due connessioni.
+    \item \textbf{Scambio delle Funzionalità supportate}: Il server e il client scambiano informazioni sui rispettivi tipi di capacità supportati, come codec per bitmap, supporto per tastiera e mouse, e configurazioni generali.
+    \item \textbf{Finalizzazione della Connessione}: Il client e il server completano la connessione attraverso una serie di PDUs per sincronizzare i rispettivi identificatori utente e definire il controllo condiviso della sessione.
+    \item \textbf{Scambio dei Dati}: Una volta stabilita la connessione, il client invia dati di input (come tastiera e mouse) e riceve output grafico dal server, con l’opzione di utilizzare la compressione per ridurre il traffico dati.
+\end{enumerate}
+
+\subsubsection{Input e Output}
+Durante una sessione RDP, il client invia dati di input (come ad esempio mouse e tastiera) al server, mentre quest ultimo invia al client dati di output, principalmente grafici. Questo scambio di dati avviene attraverso due modalità: \textit{slow-path} e \textit{fast-path}:
+\begin{itemize}
+    \item \textbf{Slow-Path}: Questa modalità è la più completa, in cui ogni pacchetto di dati (Protocol Data Unit, PDU) include l'intera serie di header del protocollo RDP. Questo lo rende adatto per inviare dati critici che richiedono la piena gestione dei metadati, anche se aumenta la dimensione dei pacchetti trasmessi e il consumo di banda.
+    \item \textbf{Fast-Path}: Riducendo o rimuovendo alcuni degli header da alcuni PDU, questa modalità permette di ridurre la quantità di dati trasmessi e la latenza di trasmissione. Inoltre così facendo riduce anche il carico di lavoro per processare i pacchetti. Fast-Path è comunemente usato per input a bassa priorità, come movimenti del mouse e sequenze di tasti, dove è importante minimizzare il ritardo.
+\end{itemize}
+
+\subsubsection{Canali in RDP}
+RDP si avvale di diversi canali per la trasmissione di dati. Esistono due tipi principali di canali:
+\begin{itemize}
+    \item \textbf{Canali Virtuali Statici (SVC)}: Limitati a 31 per connessione, questi canali trasportano comunicazioni essenziali tra client e server, come il canale I/O o il canale utente. Vengono instaurati durante lo "Scambio delle Impostazioni di Base" e rimangono attivi per tutta la durata della sessione.
+    \item \textbf{Canali Virtuali Dinamici (DVC)}: Trasportati su uno specifico SVC (DRDYNVC), i DVC, a differenza degli SVC, possono essere creati e distrutti liberamente durante la sessione. Questi canali possono essere liberamente utilizzate da sviluppatori per estendere le funzionalità di RDP. Utilizzi comuni sono l'input audio (da client a server), rendering grafico e PnP.
+\end{itemize}
+
 \subsection{...}
 
 \chapter{Sviluppi e Applicazioni attuali delle Tecnologie di Desktop Remoto}
