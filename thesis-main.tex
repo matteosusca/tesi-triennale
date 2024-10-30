@@ -63,7 +63,7 @@ Le tecnologie di desktop remoto hanno subito notevoli cambiamenti nel corso degl
 
 \chapter{Evoluzione delle Tecnologie di Desktop Remoto}
 \label{chap:evolution}
-Il voler connettersi da remoto ad un pc è una necessità che si è manifestata fin dai primi anni dell'informatica. Già negli anni '70, insieme al progetto ARPANET, si iniziò a pensare a come poter accedere a terminali remoti tramite una connessione di rete, successivamente implementata con il protocollo Telnet. 
+Il voler connettersi da remoto ad un PC è una necessità che si è manifestata fin dai primi anni dell'informatica. Già negli anni '70, insieme al progetto ARPANET, si iniziò a pensare a come poter accedere a terminali remoti tramite una connessione di rete, successivamente implementata con il protocollo Telnet. 
 Ovviamente ai giorni nostri, in molti casi, non basta più accedere solamente alla shell di un computer remoto, ma è necessario poter interagire con un'interfaccia grafica. Infatti le esigenze di accesso remoto sono cambiate col tempo e continuano a cambiare. Sono inoltre diverse a seconda del contesto in cui ci si trova: un utente che lavora da casa ha esigenze diverse da un gamer che vuole giocare in mobilità, o da un tecnico che deve risolvere un problema su un computer remoto. Per questo motivo, e per la continua evoluzione delle tecnologie, nel corso degli anni sono stati sviluppati molteplici protocolli e tecnologie con funzionalità e caratteristiche diverse.
 
 \section{Origini prime Tecnologie}
@@ -77,7 +77,7 @@ X Window System, noto anche come X o X11, è un sistema di finestre che consente
 Nasce dall'esigenza comune di due progetti del MIT, Athena e il Laboratory for Computer Science, di avere un sistema che permettesse di accedere a risorse grafiche distribuite su una rete di workstation eterogenee, indipendentemente dall'hardware o dal sistema operativo utilizzato \cite{Scheifler1986}. 
 Il nome "X" deriva dal suo predecessore, W Window System, sviluppato presso l'Università di Stanford. A differenza di W Window System, X permetteva di gestire applicazioni grafiche su workstation remote, favorendo il concetto di separazione client-server per l'accesso ai display.
 
-La versione attuale di X è la X11, rilasciata nel 1987. Questa versione è stata estesa ulteriormente negli ultimi anni ma il suo funzionamento di base è rimasto invariato e compatibile con le versioni precedenti.
+La versione attuale di X è la versione 11 (X11), rilasciata nel 1987. Questa versione è stata estesa ulteriormente negli ultimi anni ma il suo funzionamento di base è rimasto invariato e compatibile con le versioni precedenti.
 
 \paragraph{Architettura e Desktop Remoto}
 % fonte: https://www.maketecheasier.com/the-x-window-system/ e wikipedia
@@ -198,9 +198,59 @@ RDP si avvale di diversi canali per la trasmissione di dati. Esistono due tipi p
     \item \textbf{Canali Virtuali Dinamici (DVC)}: Trasportati su uno specifico SVC (DRDYNVC), i DVC, a differenza degli SVC, possono essere creati e distrutti liberamente durante la sessione. Questi canali possono essere liberamente utilizzate da sviluppatori per estendere le funzionalità di RDP. Utilizzi comuni sono l'input audio (da client a server), rendering grafico e PnP.
 \end{itemize}
 
-\subsection{...}
+\subsection{Parsec}
+Parsec è un software di desktop remoto focalizzato principalmente sul gaming. Rispetto alle tecnologie precedenti è ideato per ridurre al minimo la latenza tra il client e il server. La capacità di offrire streaming video a bassa latenza, alta risoluzione e alto frame rate lo rende adatto non solo per il gaming ma anche per applicazioni professionali come l'editing video o la progettazione grafica.
+Nasce dall'idea di utilizzare istanze GPU di Amazon Web Services per lo streaming di giochi a bassa latenza su dispositivi meno potenti e successivamente si evolve in un servizio di desktop remoto completo.
+A differenza di alcune tecnologie sopra citate, Parsec trasmette come flusso video un "mirror" del desktop dove è presente il server, permettendo di visualizzare l'intero ambiente desktop e non solo singole applicazioni. Quindi parsec si comporta come se dovesse trasmettere un video. Aggiungendo la possibilità di trasmettere input da tastiera e mouse, il client può interagire con il server come se si trovasse fisicamente davanti ad esso.
+
+Il client Parsec è disponibile per Windows, macOS, Linux, Android, Raspberry Pi e web browser. Il server Parsec è disponibile per Windows e macOS. 
+
+\subsubsection{Procedura di Trasmissione e Visualizzazione}
+
+Il flusso di lavoro di Parsec per la trasmissione video si compone delle seguenti fasi:
+\begin{enumerate}
+    \item \textbf{Cattura del frame}
+    \item \textbf{Compressione}
+    \item \textbf{Trasmissione}
+    \item \textbf{Decodifica}
+    \item \textbf{Rendering}
+\end{enumerate}
+
+\paragraph{Cattura del frame}
+Per la cattura del frame su Windows, Parsec utilizza la Desktop Duplication API (disponibile a partire da Windows 8.1), che consente diretto accesso al framebuffer e permette di trasferire il frame nella memoria video della GPU. 
+
+\paragraph{Compressione}
+Per poter trasmettere questo flusso video ad alta risoluzione e frame rate su una rete, è necessario comprimerlo. La compressione di un video può essere eseguita in due modi: software e hardware. La compressione software è eseguita dalla CPU, mentre la compressione hardware è eseguita da un chip dedicato, come una GPU (integrata o dedicata). Il vantaggio della compressione software è la compatibilità in quanto può essere eseguita su qualsiasi dispositivo, ma il suo svantaggio è il tempo impiegato per la compressione. La compressione hardware, al contrario, è molto più veloce ma richiede un chip dedicato, che non è sempre presente su tutti i dispositivi. Parsec utilizza i codec H.264 e H.265, scelti per la loro ampia compatibilità hardware così da permettere compressione hardware per qualsiasi dispositivo relativamente recente.
+
+Per ridurre al minimo le latenza, Parsec è progettato per far si che il framebuffer, una volta catturato, venga direttamente inviato alla GPU per essere codificato senza passare per la memoria di sistema, evitando operazioni CPU intermedie.
+
+\paragraph{Trasmissione}
+Per garantire una connessione a bassa latenza, Parsec utilizza due connessione Peer-To-Peer UDP sia per client che per host.
+
+\paragraph{Decodifica}
+Una volta ricevuto dal client, il frame compresso viene decodificato. Anche in questo caso Parsec predilige la decodifica hardware, sfruttando ASIC o GPU per ridurre al minimo la latenza.
+
+\paragraph{Rendering}
+L'ultimo passaggio della procedura è il rendering, che consiste nel visualizzare il frame decodificato sullo schermo del client. Parsec, per minimizzare i ritardi e garantire una visione fluida, utilizza la sincronizzazione verticale (V-sync) per allineare la visualizzazione del frame con il refresh rate del monitor, evitando problemi di tearing. Questo implica una sincronizzazione accurata tra i frame inviati dal server e il display del client.
+
+\subsubsection{Latenza}
+Come abbiamo detto, la sfida principale di Parsec è ridurre al minimo la latenza tra il client e il server. Eseguendo tutte le operazioni sulla GPU, evitando che la CPU sia coinvolta nella compressione e decompressione dei frame, Parsec riesce a ridurre la latenza a pochi millisecondi. Inoltre, utilizzando connessioni Peer-To-Peer UDP, Parsec evita i ritardi dovuti ai server intermedi, garantendo una connessione diretta tra client e host. Una limitazione che Parsec non può superare è la latenza intrinseca della rete, che può variare in base alla qualità della connessione e alla distanza geografica tra client e server. Fortunatamente negli ultimi anni la diffusione di connessioni ad alta velocità e a bassa latenza è aumentata notevolmente, sopratutto con l'aumento di connessioni Fiber To The Home (FTTH).
+
+\subsubsection{Altri Utilizzi}
+Grazie alla sua capacità di trasmettere video ad alta risoluzione e frame rate, Parsec è spesso utilizzato non solo per cloud gaming o desktop remoto Over The Internet, ma anche per Local Game Streaming. Questo consiste nell'avere una macchina potente da cui potersi collegare da altri dispositivi meno potenti, come una smart TV, così da poter avere un'esperienza di gioco di alta qualità su un dispositivo che altrimenti non sarebbe in grado di supportare i giochi più recenti.
+
+\subsection{Menzioni d'onore}
+Ci sono altri protocolli proprietari che meritano una menzione, come lo storico Team-Viewer o AnyDesk, che offrono funzionalità di desktop remoto per utenti meno esperti grazie ad un setup minimo evitando l'apertura di porte. Purtroppo le informazioni sul funzionamento di questi sono molto limitate e non è possibile approfondire ulteriormente.
+
+\paragraph{Moonlight e Sunshine}
+NVIDIA, con la tecnologia Gamestream, permetteva di trasmettere il flusso video di un gioco da un computer con una GPU NVIDIA ad un dispositivo NVIDIA Shield. Per poter utilizzare questa funzione, e il server messo a disposizione dai driver NVIDIA, e ricevere questo flusso su ogni dispositivo, la community open-source ha sviluppato Moonlight, un client compatibile con qualsiasi dispositivo Android, iOS, Windows, macOS e Linux, in grado di ricevere il flusso video da un server NVIDIA Gamestream.
+
+Quando nel 2022 NVIDIA ha deciso di rimuovere il supporto per i server Gamestream, la community ha sviluppato Sunshine, un server open-source in grado di trasmettere il flusso video di un gioco da un computer con una qualsiasi GPU (Gamestream era limitato a NVIDIA) ad un client Moonlight.
+Con il passare del tempo Sunshine è migliorato notevolmente, ed utilizzando un concetto molto simile a quello di Parsec, è in grado di ottenere latenze molto basse, rendendolo adatto non solo per il gaming, ma anche per applicazioni professionali. Inoltre la sua natura open-source e i continui impegni della community a migliorarlo, lo rendono migliore di molte soluzioni proprietarie. Sunshine infatti, rispetto a Parsec, è disponibile anche su Linux, oltre che su Windows e macOS. Supporta inoltre numerosi metodi di cattura e permette all'utente di modificare parametri come la qualità del video, la risoluzione e il frame rate, in base alle necessità e alla potenza del computer.
+
 
 \chapter{Sviluppi e Applicazioni attuali delle Tecnologie di Desktop Remoto}
+% -- VDI, Cloud Gaming, Smart working, Assistenza Remota, DaaS, Applicazioni virtualizzate
 
 \section{Nuove Esigenze e Utilizzi}
 
@@ -211,6 +261,7 @@ RDP si avvale di diversi canali per la trasmissione di dati. Esistono due tipi p
 \section{...}
 
 \chapter{Prospettive, Sviluppi e Applicazioni futuri del Desktop Remoto}
+% -- IA upscaling per ridurre latenza, Edge Computing, Fog Computing, AR VR, Blockchain?
 
 \section{Desktop as a Service}
 
