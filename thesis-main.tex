@@ -402,11 +402,11 @@ Il client Parsec è disponibile per Windows, macOS, Linux, Android, Raspberry Pi
 
 Il flusso di lavoro di Parsec per la trasmissione video si compone delle seguenti fasi:
 \begin{enumerate}
-    \item \textbf{Cattura del frame}
-    \item \textbf{Compressione}
-    \item \textbf{Trasmissione}
-    \item \textbf{Decodifica}
-    \item \textbf{Rendering}
+    \item Cattura del frame
+    \item Compressione
+    \item Trasmissione
+    \item Decodifica
+    \item Rendering
 \end{enumerate}
 
 \paragraph{Cattura del frame}
@@ -482,7 +482,17 @@ Questo porta a una serie di vantaggi per le aziende o gli utenti che ne fanno us
     \item \textbf{Accesso globale}: le risorse sono accessibili da qualsiasi luogo connesso a Internet;
     \item \textbf{Flessibilità e scalabilità}: le risorse possono essere adattate alle esigenze specifiche dell'applicazione e aumentate o ridotte rapidamente;
 \end{itemize}   
-Per questo ed altri motivi, l'IaaS è diventato uno dei modelli di servizio più diffusi nel cloud computing. Affiancato ad una tecnologia di Desktop Remoto a bassa latenza, permette di avere un'esperienza di utilizzo comparabile a quella di un computer fisico, con la flessibilità e la scalabilità tipiche del cloud computing.
+Per questo ed altri motivi, l'IaaS è diventato uno dei modelli di servizio più diffusi nel cloud computing. Affiancato ad una tecnologia di Desktop Remoto a bassa latenza, permette di avere un'esperienza di utilizzo indistinguibile da un computer fisico, con la flessibilità e la scalabilità tipiche del cloud computing.
+
+\subsection{Provider e Cliente}
+\label{subsec:provider_cliente}
+
+Nel modello Infrastructure as a Service (IaaS), il \textbf{Provider} e il \textbf{Cliente} svolgono ruoli distinti e complementari. Il Provider è responsabile della gestione dell'infrastruttura fisica e virtuale, come server, rete e sistemi di archiviazione, garantendo sicurezza e continuità del servizio. Inoltre, il Provider si occupa del monitoraggio continuo delle risorse, della manutenzione e degli aggiornamenti, così come della scalabilità, permettendo al Cliente di aumentare o ridurre le risorse in base alle proprie necessità. Il livello di servizio viene formalizzato in specifici SLA (Service Level Agreements), che stabiliscono standard di disponibilità e prestazioni.
+
+Dall'altra parte, il Cliente gestisce le proprie applicazioni e dati all'interno dell'infrastruttura fornita. Pur non essendo coinvolto nella gestione dell'hardware, il Cliente è responsabile della configurazione del software, della protezione dei dati e dell'accesso sicuro alle applicazioni. Inoltre, deve monitorare l'uso delle risorse per ottimizzare i costi e garantire la conformità alle normative di settore.
+
+In questo modello, Provider e Cliente lavorano in sinergia per garantire un uso efficiente e sicuro delle risorse cloud: il Provider fornisce la piattaforma infrastrutturale e ne assicura il funzionamento, mentre il Cliente ne sfrutta le potenzialità per eseguire le proprie applicazioni e gestire i propri dati.
+
 
 
 \chapter{Prospettive, Sviluppi e Applicazioni futuri del Desktop Remoto}
