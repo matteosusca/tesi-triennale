@@ -248,22 +248,42 @@ NVIDIA, con la tecnologia Gamestream, permetteva di trasmettere il flusso video 
 Quando nel 2022 NVIDIA ha deciso di rimuovere il supporto per i server Gamestream, la community ha sviluppato Sunshine, un server open-source in grado di trasmettere il flusso video di un gioco da un computer con una qualsiasi GPU (Gamestream era limitato a NVIDIA) ad un client Moonlight.
 Con il passare del tempo Sunshine è migliorato notevolmente, ed utilizzando un concetto molto simile a quello di Parsec, è in grado di ottenere latenze molto basse, rendendolo adatto non solo per il gaming, ma anche per applicazioni professionali. Inoltre la sua natura open-source e i continui impegni della community a migliorarlo, lo rendono migliore di molte soluzioni proprietarie. Sunshine infatti, rispetto a Parsec, è disponibile anche su Linux, oltre che su Windows e macOS. Supporta inoltre numerosi metodi di cattura e permette all'utente di modificare parametri come la qualità del video, la risoluzione e il frame rate, in base alle necessità e alla potenza del computer.
 
-
-\chapter{Sviluppi e Applicazioni attuali delle Tecnologie di Desktop Remoto}
+\chapter{Sviluppi e Applicazioni Attuali delle Tecnologie di Desktop Remoto}
+\label{chap:current-applications}
 % -- VDI, Cloud Gaming, Smart working, Assistenza Remota, DaaS, Applicazioni virtualizzate
 
-\section{Nuove Esigenze e Utilizzi}
+In questo capitolo verranno analizzati gli sviluppi e le applicazioni delle tecnologie di desktop remoto attualmente in uso. Negli ultimi anni, l'utilizzo delle soluzioni di accesso remoto si è ampliato, adattandosi alle esigenze di settori diversi, dai contesti lavorativi tradizionali a settori emergenti come il cloud gaming e le piattaforme di collaborazione virtuale. Le tecnologie moderne hanno raggiunto livelli di prestazioni e sicurezza avanzati, rendendo il desktop remoto un elemento centrale nel telelavoro, nell'assistenza tecnica e nelle applicazioni di streaming in tempo reale.
 
-\section{Protocolli di Desktop Remoto moderni}
+Di seguito si esamineranno le principali applicazioni delle tecnologie di desktop remoto oggi disponibili, con particolare attenzione all’ottimizzazione delle risorse di rete, alla sicurezza e alle modalità d'uso nei vari contesti.
 
-\section{Cloud Gaming e Low-latency Streaming}
+\section{Infrastructure as a Service (IaaS)}
+\label{sec:iaas}
+Un possibile e diffuso utilizzo delle tecnologie di desktop remoto è il suo impiego all'interno di servizi di cloud computing, in particolare nell'ambito dell'Infrastructure as a Service (IaaS).
+Infrastructure as a Service è un termine che indica un modello di servizio dove un fornitore di servizi cloud mette a disposizione degli utenti risorse hardware virtualizzate, come server, reti, spazio di archiviazione e sistemi operativi, su richiesta. In poche parole permette all'utente di noleggiare un'infrastruttura IT completa, senza dover acquistare o gestire fisicamente hardware e strutture di rete \cite{bhardwaj2010cloud}.
 
-\section{...}
+\subsection{Caratteristiche di IaaS}
+Un provide di servizi IaaS mette a disposizione dell'utente l'hardware (tipicamente virtualizzato), i servizi amministrativi per la gestione delle risorse e una piattaforma per poter eseguire applicativi (come sistemi operativi).
+Come ogni servizio di cloud computing, IaaS ricade sotto queste cinque caratteristiche fondamentali:
+\begin{itemize}
+    \item \textbf{Self-service on demand}: l'utente può richiedere e configurare risorse in modo autonomo, senza l'intervento del fornitore;
+    \item \textbf{Ampio accesso alla rete}: le risorse sono accessibili tramite Internet o una rete privata;
+    \item \textbf{Risorse condivise}: le risorse sono condivise tra più utenti, garantendo efficienza e scalabilità;
+    \item \textbf{Risorse scalabili}: le risorse possono essere allocate e deallocate rapidamente in base alle esigenze;
+    \item \textbf{Misurabilità del servizio}: l'uso delle risorse può essere monitorato e misurato, consentendo una gestione efficiente dei costi.
+\end{itemize}
+Questo porta a una serie di vantaggi per le aziende o gli utenti che ne fanno uso, tra cui:
+\begin{itemize}
+    \item \textbf{Costo incrementale}: l'utente paga solo per le risorse effettivamente utilizzate e per il tempo di utilizzo;
+    \item \textbf{Ampio storage}: possibilità di archiviare grandi quantità di dati in modo scalabile;
+    \item \textbf{Mantenimento semplificato}: il fornitore si occupa della manutenzione dell'hardware e degli aggiornamenti software (almeno quelli di base);
+    \item \textbf{Accesso globale}: le risorse sono accessibili da qualsiasi luogo connesso a Internet;
+    \item \textbf{Flessibilità e scalabilità}: le risorse possono essere adattate alle esigenze specifiche dell'applicazione e aumentate o ridotte rapidamente;
+\end{itemize}   
+Per questo ed altri motivi, l'IaaS è diventato uno dei modelli di servizio più diffusi nel cloud computing. Affiancato ad una tecnologia di Desktop Remoto a bassa latenza, permette di avere un'esperienza di utilizzo comparabile a quella di un computer fisico, con la flessibilità e la scalabilità tipiche del cloud computing.
+
 
 \chapter{Prospettive, Sviluppi e Applicazioni futuri del Desktop Remoto}
 % -- IA upscaling per ridurre latenza, Edge Computing, Fog Computing, AR VR, Blockchain?
-
-\section{Desktop as a Service}
 
 \section{Edge Computing}
 
