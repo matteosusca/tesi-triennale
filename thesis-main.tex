@@ -185,7 +185,7 @@ ma spesso vengono utilizzati altri canali comunicativi come Unix domain sockets 
 Indipendentemente dal canale utilizzato, è necessario che questo sia affidabile e che garantisca l'integrità e l'ordine dei messaggi,
 in quanto il protocollo X non implementa nativamente meccanismi di ritrasmissione o di ordinamento dei pacchetti.
 %
-Quando un client si connette a un server X, avviene una fase di handshake che stabilisce la connessione e verifica l'autenticazione del client. Successivamente, il client può inviare richieste al server, come la creazione di finestre, il disegno di elementi grafici, o la gestione dell'input. Le richieste vengono accumulate in un buffer e inviate in modo asincrono per migliorare l'efficienza della comunicazione. Il server gestisce le richieste di più client contemporaneamente, garantendo l'isolamento tra loro, ma non fornisce alcuna garanzia di ordinamento tra client differenti, a meno che non venga esplicitamente richiesto \cite{xDevGuide}.
+Quando un client si connette a un server X, avviene una fase di handshake che stabilisce la connessione e verifica l'autenticazione del client. Successivamente, il client può inviare richieste al server, come la creazione di finestre, il disegno di elementi grafici, o la gestione dell'input. Le richieste vengono accumulate in un buffer e inviate in modo asincrono per migliorare l'efficienza della comunicazione. Il server gestisce le richieste di più client contemporaneamente, garantendo l'isolamento tra loro, ma non fornisce alcuna garanzia di ordinamento tra client differenti, a meno che non venga esplicitamente richiesto.
 
 A differenza di altri protocolli progettati specificamente per il desktop remoto,
 X è stato sviluppato principalmente per l'esecuzione remota di singole applicazioni grafiche,
@@ -336,7 +336,7 @@ I dati di un'applicazione o servizio vengono segmentati,
 indirizzati a un canale, crittografati,
 incapsulati e impacchettati nel protocollo di rete, per poi essere inviati al client.
 %
-I dati ricevuti subiscono il processo inverso: vengono decapsulati, decrittografati e, infine, resi disponibili all'applicazione. \cite{microsoftrdp}
+I dati ricevuti subiscono il processo inverso: vengono decapsulati, decrittografati e, infine, resi disponibili all'applicazione.
 
 \subsubsection{Connessione}
 
@@ -442,8 +442,10 @@ Come abbiamo detto, la sfida principale di Parsec è ridurre al minimo la latenz
 \subsubsection{Altri Utilizzi}
 Grazie alla sua capacità di trasmettere video ad alta risoluzione e frame rate, Parsec è spesso utilizzato non solo per cloud gaming o desktop remoto Over The Internet, ma anche per Local Game Streaming. Questo consiste nell'avere una macchina potente da cui potersi collegare da altri dispositivi meno potenti, come una smart TV, così da poter avere un'esperienza di gioco di alta qualità su un dispositivo che altrimenti non sarebbe in grado di supportare i giochi più recenti.
 
-\subsection{Menzioni d'onore}
+\subsection{Tecnologie degne di nota}
 Ci sono altri protocolli proprietari che meritano una menzione, come lo storico Team-Viewer o AnyDesk, che offrono funzionalità di desktop remoto per utenti meno esperti grazie ad un setup minimo evitando l'apertura di porte. Purtroppo le informazioni sul funzionamento di questi sono molto limitate e non è possibile approfondire ulteriormente.
+
+Con la diffusione del local game streaming, sono nate altre tecnologie simili a Parsec, che offrono funzionalità simili ma con alcune differenze. Tra queste troviamo Steam Link (sviluppato da Valve), Rainway e Moonlight.
 
 \paragraph{Moonlight e Sunshine}
 NVIDIA, con la tecnologia Gamestream, permetteva di trasmettere il flusso video di un gioco da un computer con una GPU NVIDIA ad un dispositivo NVIDIA Shield. Per poter utilizzare questa funzione, e il server messo a disposizione dai driver NVIDIA, e ricevere questo flusso su ogni dispositivo, la community open-source ha sviluppato Moonlight, un client compatibile con qualsiasi dispositivo Android, iOS, Windows, macOS e Linux, in grado di ricevere il flusso video da un server NVIDIA Gamestream.
@@ -459,10 +461,21 @@ In questo capitolo verranno analizzati gli sviluppi e le applicazioni delle tecn
 
 Di seguito si esamineranno le principali applicazioni delle tecnologie di desktop remoto oggi disponibili, con particolare attenzione all’ottimizzazione delle risorse di rete, alla sicurezza e alle modalità d'uso nei vari contesti.
 
-\section{Infrastructure as a Service (IaaS)}
+\section{Assistenza Remota}
+\label{sec:remote-assistance}
+
+L'assistenza remota rappresenta una delle applicazioni più diffuse delle tecnologie di desktop remoto, consentendo a un operatore tecnico di visualizzare e, all'occorrenza, controllare il desktop di un utente remoto. Questo approccio trova applicazione in diversi ambiti, sia professionali che personali, grazie alla possibilità di intervenire su una postazione senza la necessità di spostamenti fisici, riducendo così tempi e costi operativi in modo significativo.
+
+Nel contesto aziendale, l'assistenza remota permette al personale tecnico di fornire supporto ai dipendenti senza doversi spostare fisicamente tra gli uffici o recarsi presso le sedi dei clienti. Tale supporto risulta particolarmente utile per le aziende che vendono software, poiché i tecnici possono utilizzare strumenti di desktop remoto per mostrare ai clienti l'uso corretto di un'applicazione o per risolvere eventuali problemi in tempo reale. 
+
+Anche in ambito domestico, l'assistenza remota è ampiamente utilizzata per risolvere problematiche informatiche a distanza. Un tecnico autorizzato, o anche un conoscente, può accedere al dispositivo dell’utente per fornire supporto tramite software specifici come \textit{Quick Assist}, preinstallato sui sistemi Windows 10 e 11.
+
+
+
+\section{Infrastructure as a Service}
 \label{sec:iaas}
 Un possibile e diffuso utilizzo delle tecnologie di desktop remoto è il suo impiego all'interno di servizi di cloud computing, in particolare nell'ambito dell'Infrastructure as a Service (IaaS).
-Infrastructure as a Service è un termine che indica un modello di servizio dove un fornitore di servizi cloud mette a disposizione degli utenti risorse hardware virtualizzate, come server, reti, spazio di archiviazione e sistemi operativi, su richiesta. In poche parole permette all'utente di noleggiare un'infrastruttura IT completa, senza dover acquistare o gestire fisicamente hardware e strutture di rete \cite{bhardwaj2010cloud}.
+Infrastructure as a Service è un termine che indica un modello di servizio dove un fornitore di servizi cloud mette a disposizione degli utenti risorse hardware virtualizzate, come server, reti, spazio di archiviazione e sistemi operativi, su richiesta. In poche parole permette all'utente di noleggiare un'infrastruttura IT completa, senza dover acquistare o gestire fisicamente hardware e strutture di rete.
 
 \subsection{Caratteristiche di IaaS}
 Un provide di servizi IaaS mette a disposizione dell'utente l'hardware (tipicamente virtualizzato), i servizi amministrativi per la gestione delle risorse e una piattaforma per poter eseguire applicativi (come sistemi operativi).
@@ -481,18 +494,41 @@ Questo porta a una serie di vantaggi per le aziende o gli utenti che ne fanno us
     \item \textbf{Mantenimento semplificato}: il fornitore si occupa della manutenzione dell'hardware e degli aggiornamenti software (almeno quelli di base);
     \item \textbf{Accesso globale}: le risorse sono accessibili da qualsiasi luogo connesso a Internet;
     \item \textbf{Flessibilità e scalabilità}: le risorse possono essere adattate alle esigenze specifiche dell'applicazione e aumentate o ridotte rapidamente;
-\end{itemize}   
-Per questo ed altri motivi, l'IaaS è diventato uno dei modelli di servizio più diffusi nel cloud computing. Affiancato ad una tecnologia di Desktop Remoto a bassa latenza, permette di avere un'esperienza di utilizzo indistinguibile da un computer fisico, con la flessibilità e la scalabilità tipiche del cloud computing.
+\end{itemize}
 
 \subsection{Provider e Cliente}
 \label{subsec:provider_cliente}
+Nel modello Infrastructure as a Service (IaaS), gli attori principali sono il \textbf{Provider} e il \textbf{Cliente}. Il Provider è responsabile della gestione dell'infrastruttura fisica e virtuale, come server, macchine virtuali, rete e sistemi di archiviazione. Inoltre si occupa della manutenzione e degli aggiornamenti dei software e sistema operativo 
 
-Nel modello Infrastructure as a Service (IaaS), il \textbf{Provider} e il \textbf{Cliente} svolgono ruoli distinti e complementari. Il Provider è responsabile della gestione dell'infrastruttura fisica e virtuale, come server, rete e sistemi di archiviazione, garantendo sicurezza e continuità del servizio. Inoltre, il Provider si occupa del monitoraggio continuo delle risorse, della manutenzione e degli aggiornamenti, così come della scalabilità, permettendo al Cliente di aumentare o ridurre le risorse in base alle proprie necessità. Il livello di servizio viene formalizzato in specifici SLA (Service Level Agreements), che stabiliscono standard di disponibilità e prestazioni.
+Nel modello Infrastructure as a Service (IaaS), il \textbf{Provider} e il \textbf{Cliente} svolgono ruoli distinti e complementari. Il Provider è responsabile della gestione dell'infrastruttura fisica e virtuale, come server, rete e sistemi di archiviazione. Inoltre, il Provider si occupa del monitoraggio continuo delle risorse, della manutenzione e degli aggiornamenti, così come della scalabilità, permettendo al Cliente di aumentare o ridurre le risorse in base alle proprie necessità. Il livello di servizio viene formalizzato in specifici SLA (Service Level Agreements), che stabiliscono standard di disponibilità e prestazioni.
 
-Dall'altra parte, il Cliente gestisce le proprie applicazioni e dati all'interno dell'infrastruttura fornita. Pur non essendo coinvolto nella gestione dell'hardware, il Cliente è responsabile della configurazione del software, della protezione dei dati e dell'accesso sicuro alle applicazioni. Inoltre, deve monitorare l'uso delle risorse per ottimizzare i costi e garantire la conformità alle normative di settore.
+Dall'altra parte, il Cliente gestisce le proprie applicazioni e dati all'interno dell'infrastruttura fornita. Pur non essendo coinvolto nella gestione dell'hardware, il Cliente è responsabile della configurazione del software, della protezione dei dati e dell'accesso sicuro alle applicazioni.
 
-In questo modello, Provider e Cliente lavorano in sinergia per garantire un uso efficiente e sicuro delle risorse cloud: il Provider fornisce la piattaforma infrastrutturale e ne assicura il funzionamento, mentre il Cliente ne sfrutta le potenzialità per eseguire le proprie applicazioni e gestire i propri dati.
+\subsection{Desktop as a Service}
+\label{subsec:daas}
+Desktop as a Service (DaaS) è un modello di cloud computing in cui un provider fornisce desktop virtuali accessibili via Internet. A differenza di IaaS, che mette a disposizione risorse infrastrutturali di base come server e storage su cui un cliente può costruire e gestire autonomamente il proprio ambiente IT, DaaS offre un ambiente desktop pronto all'uso, ideale per utenti finali che necessitano di un accesso immediato a un sistema completo senza doversi occupare di configurazioni hardware.
 
+\subsubsection{Similitudini e differenze con IaaS}
+Entrambi i modelli offrono scalabilità e gestione centralizzata, permettendo di pagare solo per le risorse effettivamente utilizzate. Tuttavia, mentre in IaaS il Cliente è responsabile del sistema operativo e delle applicazioni, in DaaS il provider gestisce interamente il desktop, inclusi aggiornamenti e sicurezza. Questo rende DaaS una soluzione più semplice e immediata, particolarmente utile per scenari di lavoro remoto.
+
+\subsubsection{Vantaggi di DaaS e Desktop Remoto}
+DaaS offre accessibilità da qualsiasi dispositivo, maggiore sicurezza dei dati grazie alla gestione centralizzata, e una riduzione dei costi di manutenzione. In sintesi, IaaS è ideale per chi necessita di infrastrutture flessibili, mentre DaaS è pensato per chi cerca un desktop virtuale pronto all'uso.
+
+Rispetto ad una soluzione IaaS, DaaS potrebbe essere meno flessibile per quanto riguarda la scelta del sistema operativo e applicazioni, ma guadagna in semplicità e immediatezza d'uso.
+Prendiamo in esempio un 3D artist che necessita di un ambiente di lavoro con una GPU potente per eseguire rendering complessi. Con una soluzione IaaS, l'artista potrebbe configurare un server con una GPU dedicata e installare il software necessario. Con DaaS, invece, potrebbe accedere a un desktop virtuale già configurato con le specifiche richieste, senza dover gestire l'infrastruttura sottostante.
+Abbinando un sistema scalabile, immediato e on-demand come DaaS con una tecnologia di desktop remoto a bassa latenza, DaaS diventa un'alternativa competitiva rispetto all'acquisto di hardware fisico costoso e alla gestione di un'infrastruttura IT complessa.
+
+Inoltre bisogna considerare che un utente può accedere al proprio desktop virtuale da qualsiasi dispositivo connesso a Internet.
+Poter accedere da un laptop in treno, successivamente dalla workstation in ufficio e infine dal tablet a casa senza mai perdere lo stato dell'ambiente di lavoro, è un vantaggio che non può essere sottovalutato, sopratutto in un'epoca in cui il lavoro remoto è sempre più diffuso.
+
+\section{Cloud Gaming}
+\label{sec:cloud-gaming}
+L'industria dei videogiochi ha visto una enorme crescita negli ultimi anni, sopratutto per quanto riguarda la potenza di calcolo richiesta per eseguire i giochi più recenti. Molti di questi, sopratutto i tripla A (termine utilizzato per indicare giochi con un budget di sviluppo molto alto), utilizzano modelli 3D complessi, texture ad alta risoluzione e tecnologie come il ray tracing, che migliorano notevolmente la qualità grafica ma richiedono una potenza di calcolo molto elevata.
+Hardware in grado di supportare questi giochi può essere molto costoso, e non tutti gli utenti possono permettersi di acquistare una GPU di fascia alta o un computer con specifiche tecniche elevate.
+Per questo ed altri motivi che vedremo in seguito, il cloud gaming è diventato una soluzione sempre più popolare.
+Cloud Gaming, anche noto come Gaming as a Service (GaaS), è un servizio di cloud computing che permette agli utenti di giocare a videogiochi su server remoti, trasmettendo il flusso video del gioco a bassa latenza su dispositivi client di vario tipo. \cite{HARLE2023}
+
+\subsection{Funzionamento}
 
 
 \chapter{Prospettive, Sviluppi e Applicazioni futuri del Desktop Remoto}
