@@ -14,6 +14,11 @@
 \acrodef{PDU}{Protocol Data Units}
 \acrodef{SVC}{Static Virtual Channels}
 \acrodef{DCV}{Dynamic Virtual Channels}
+\acrodef{LAN}{Local Area Network}
+\acrodef{IaaS}{Infrastructure as a Service}
+\acrodef{PaaS}{Platform as a Service}
+\acrodef{SaaS}{Software as a Service}
+\acrodef{GaaS}{Gaming as a Service}
 
 
 \school{\unibo}
@@ -387,6 +392,7 @@ Questo scambio di dati avviene attraverso due modalità: \textit{slow-path} e \t
 \end{itemize}
 
 \subsection{Parsec}
+\label{sec:parsec}
 Parsec è un software di desktop remoto focalizzato principalmente sul gaming. Rispetto alle tecnologie precedenti è ideato per ridurre al minimo la latenza tra il client e il server.
 La capacità di offrire streaming video a bassa latenza, alta risoluzione e alto frame rate lo rende adatto non solo per il gaming ma anche per applicazioni professionali come l'editing video o la progettazione grafica.
 Nasce dall'idea di utilizzare istanze GPU di Amazon Web Services per lo streaming di giochi a bassa latenza su dispositivi meno potenti e successivamente si evolve in un servizio di desktop remoto completo.
@@ -414,6 +420,7 @@ Per la cattura del frame su Windows, Parsec utilizza la Desktop Duplication API 
 che consente diretto accesso al framebuffer e permette di trasferire il frame nella memoria video della GPU.
 
 \paragraph{Compressione}
+\label{sec:compressione}
 Per poter trasmettere questo flusso video ad alta risoluzione e frame rate su una rete, è necessario comprimerlo.
 La compressione di un video può essere eseguita in due modi: software e hardware.
 %
@@ -529,7 +536,29 @@ Per questo ed altri motivi che vedremo in seguito, il cloud gaming è diventato 
 Cloud Gaming, anche noto come Gaming as a Service (GaaS), è un servizio di cloud computing che permette agli utenti di giocare a videogiochi su server remoti, trasmettendo il flusso video del gioco a bassa latenza su dispositivi client di vario tipo. \cite{HARLE2023}
 
 \subsection{Funzionamento}
+\label{subsec:funzionamento}
 
+Il funzionamento del cloud gaming si basa sull'architettura del cloud computing, che permette di eseguire i giochi in remoto su server e di trasmettere in streaming il video generato all'utente finale. Questo modello, noto come Gaming as a Service (GaaS), sfrutta i modelli di servizio IaaS, PaaS e SaaS per offrire un servizio scalabile e facile da utilizzare.
+
+\subsubsection{Infrastructure as a Service (IaaS)}
+in GaaS, i provider utilizzano IaaS per fornire l'infrastruttura hardware necessaria. Le risorse includono server con CPU e GPU potenti in grado di eseguire i giochi più "pesanti". Grazie a IaaS, i provider possono gestire dinamicamente l'allocazione delle risorse, adattandole in tempo reale alla domanda e ottimizzando i costi. Inoltre potendo distribuire i server in data center in tutto il mondo, è possibile ridurre la latenza e distribuire il carico in modo efficiente \cite{HARLE2023}.
+
+\subsubsection{Platform as a Service (PaaS)}
+PaaS può essere utilizzato dagli sviluppatori di videogiochi per avere un ambiente stabile e scalabile su cui sviluppare e testare i giochi senza doversi preoccupare dell'hardware sottostante. I provider forniscono piattaforme con librerie, strumenti e software necessari per lo sviluppo di giochi \cite{HARLE2023}.
+
+\subsubsection{Software as a Service (SaaS)}
+Quando si parla di cloud gaming, il livello SaaS è l'ultimo passo per fornire i giochi agli utenti finali. I servizi SaaS permettono all'utente di avviare un gioco direttamente dalla piattaforma di streaming (ad esempio dal browser o da un applicativo installato sul thin-client) senza bisogno di scaricare ed installare pesanti file di gioco. È proprio qui che le tecnologie di desktop virtuale e remoto entrano in gioco, permettendo di trasmettere il flusso video del gioco dal server IaaS al dispositivo dell'utente ed inviare input da tastiera e mouse al server \cite{HARLE2023}.
+
+\subsection{Tecnologie di streaming}
+\label{subsec:streaming-tech}
+Per ridurre al minimo la latenza, aumentare la qualità del video e garantire un'esperienza di gioco fluida, i provider di cloud gaming utilizzano tecnologie di streaming avanzate.
+Alcune di queste tecnologie includono:
+
+\paragraph{Streaming a Bitrate Adattivo} Questa tecnologia permette di adattare la qualità del video in base allo scenario presente e alla larghezza di banda disponibile. È molto utile in situazioni in cui la connessione Internet è instabile, permettendo di mantenere un'esperienza di gioco fluida anche in presenza di fluttuazioni della larghezza di banda.
+
+\paragraph{H.264 e H.265} Questi codec sono utilizzati per comprimere il flusso video in modo efficiente, riducendo la quantità di dati trasmessi e garantendo una qualità video elevata. Vedi \ref{sec:compressione}.
+
+\paragraph{QUIC} Quick UDP Internet Connections (QUIC) è un protocollo di trasporto sviluppato da Google che permette di ridurre la latenza e migliorare la sicurezza delle connessioni Internet. Queste caratteristiche lo rendono particolarmente adatto per il cloud gaming.
 
 \chapter{Prospettive, Sviluppi e Applicazioni futuri del Desktop Remoto}
 % -- IA upscaling per ridurre latenza, Edge Computing, Fog Computing, AR VR, Blockchain?
