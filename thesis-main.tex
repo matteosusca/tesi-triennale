@@ -19,6 +19,7 @@
 \acrodef{PaaS}{Platform as a Service}
 \acrodef{SaaS}{Software as a Service}
 \acrodef{GaaS}{Gaming as a Service}
+\acrodef{FPS}{First Person Shooter}
 
 
 \school{\unibo}
@@ -468,6 +469,8 @@ In questo capitolo verranno analizzati gli sviluppi e le applicazioni delle tecn
 
 Di seguito si esamineranno le principali applicazioni delle tecnologie di desktop remoto oggi disponibili, con particolare attenzione all’ottimizzazione delle risorse di rete, alla sicurezza e alle modalità d'uso nei vari contesti.
 
+\section{Smart Working}
+
 \section{Assistenza Remota}
 \label{sec:remote-assistance}
 
@@ -559,6 +562,43 @@ Alcune di queste tecnologie includono:
 \paragraph{H.264 e H.265} Questi codec sono utilizzati per comprimere il flusso video in modo efficiente, riducendo la quantità di dati trasmessi e garantendo una qualità video elevata. Vedi \ref{sec:compressione}.
 
 \paragraph{QUIC} Quick UDP Internet Connections (QUIC) è un protocollo di trasporto sviluppato da Google che permette di ridurre la latenza e migliorare la sicurezza delle connessioni Internet. Queste caratteristiche lo rendono particolarmente adatto per il cloud gaming.
+
+\subsection{Vantaggi e Svantaggi}
+Il Cloud Gaming condivide molti degli stessi vantaggi e svantaggi dei servizi IaaS e DaaS, con alcune caratteristiche specifiche. Vediamo insieme i principali vantaggi e svantaggi del cloud gaming.
+
+\subsubsection{Vantaggi}
+\paragraph{Facilità d'uso} Uno degli aspetti più apprezzati del cloud gaming è la facilità d'uso. Gli utenti devono semplicemente scaricare un applicativo o accedere ad una pagina Web da un qualsiasi dispositivo connesso a Internet e possono iniziare a giocare immediatamente, senza dover installare o configurare software aggiuntivo.
+\paragraph{Comptaibilità multipiattaforma} Una grande limitazione nell'industria videoludica sta proprio nella compatibilità dei giochi con i vari sistemi operativi. Windows è il leader indiscusso per quanto riguarda il gaming e questo limita molto la quantità di dispositivi su cui è possibile giocare. Il cloud gaming d'altro canto permette di giocare ad un qualsiasi gioco presente sulla piattaforma di streaming, su un qualsiasi dispositivo compatibile con il client di streaming (che risulta molto più semplice da sviluppare rispetto ad un gioco completo).
+\paragraph{Riduzione dei costi} La possibilità di avere accesso ad hardware potente grazie ad un piano di abbonamento mensile o ad utilizzo, abbassa la barriera di ingresso per i giocatori che non possono permettersi di acquistare componenti hardware costosi.
+\paragraph{Prevenzione di pirateria} Essendo i giochi eseguiti e archiviati sui server del provider, è molto più difficile, se non impossibile, per un utente eseguire una copia non autorizzata del gioco.
+\paragraph{Manutenzione ed aggiornamenti} Le piattaforme di cloud gaming possono applicare aggiornamenti e patch in modo centralizzato, garantendo che tutti gli utenti abbiano sempre accesso alla versione più recente del gioco. Inoltre, la manutenzione dell'hardware è a carico del provider, riducendo i costi e i tempi di inattività per l'utente.
+
+\subsubsection{Svantaggi}
+\paragraph{Latenza} Per quanto fino ad ora abbiamo parlato di come tecnologie recenti abbiamo portato la latenza a livelli impensabili fino a qualche anno fa, questa rimane comunque un problema per il cloud gaming. Anche se molto bassa, quando si parla di gaming, anche pochi millisecondi possono fare la differenza. In giochi \ac{FPS}, la reattività è fondamentale, sopratutto in multiplayer, dove pochi millisecondi in meno danno un vantaggio competitivo considerevole. Purtroppo la latenza è un problema intrinseco del cloud gaming, e nonostante i continui miglioramenti, non può essere completamente eliminata. Sia chiaro però che il caso dei giochi \ac{FPS} è un caso limite; per la maggior parte dei giochi, la latenza è più che accettabile e non influisce sull'esperienza di gioco, anche se queste sono valutazioni molto soggettive.
+\paragraph{Larghezza di banda e Requisiti di connessione} Il cloud gaming richiede una connessione relativamente veloce e stabile per garantire un'esperienza di gioco fluida. Lo scenario ideale sarebbe una connessione cablata e un contratto FTTH in quanto in questo modo la banda è garantita e la latenza è molto bassa.
+
+\subsection{Principali Servizi di Cloud Gaming}
+In una industria redditizia come quella dei videogiochi, in cui il valore del mercato globale è stimato a circa 184 miliardi di dollari nel 2023 secondo \href{https://www.gamesindustry.biz/gamesindustrybiz-presents-the-year-in-number-2023}{GameIndustry.biz}, non sorprende che molte aziende tech abbiano investito nel cloud gaming. Di seguito sono elencati alcuni dei principali servizi di cloud gaming attualmente disponibili sul mercato.
+
+\subsubsection{NVIDIA GeForce Now}
+GeForce Now è probabilmente il leader del mercato del cloud gaming. NVIDIA, nota azienda produttrice di GPU, lancia NVIDIA GeForce Now (precedentemente chiamato NVIDIA Grid) nel 2013, come software beta per i dispositivi Shield. Viene poi rilasciato ufficialmente nel 2015. Questo servizio permetteva agli utenti abbonati di avere accesso illimitato ad una libreria limitata di giochi disponibile nei server NVIDIA.
+Nel 2017, NVIDIA lancia GeForce Now per Windows e Mac, e successivamente, nel 2019, per Android. Nel 2019 viene cambiato il modello di business; ora l'utente non pagava più un abbonamento mensile per avere accesso ad una libreria di giochi, ma poteva giocare ai propri giochi acquistati su Steam, Epic Games Store, Uplay e altri store, su server NVIDIA. I piani di abbonamento differiscono per il tempo di gioco massimo continuativo e per la potenza della GPU a disposizione.
+Il servizio esce completamente dalla fase beta nel 2020.
+
+\subsubsection{Xbox Cloud Gaming}
+Xbox Cloud Gaming, precedentemente noto come Project xCloud, è un servizio di cloud gaming sviluppato da Microsoft e incluso nel servizio Xbox Game Pass Ultimate. Viene rilasciato in beta nel 2019 e ufficialmente nel 2020. Il modello di business consiste nel pagare un abbonamento mensile per avere accesso ad una libreria di giochi disponibili su Xbox Game Pass, che include alcuni titoli di Xbox e PC. Il servizio è disponibile su dispositivi Android, iOS, Windows, Mac, browser e molti altri dispositivi.
+
+\subsubsection{Playstation Now}
+Playstation Now è il servizio di cloud gaming di Sony, disponibile per PlayStation 4, PlayStation 5, PC e dispositivi Android. Il servizio permette di giocare a una vasta libreria di giochi PlayStation 2, 3 e 4 in streaming, senza la necessità di scaricare i giochi. Il servizio è stato ora unito a PlayStation Plus, il servizio di abbonamento di Sony.
+
+\subsubsection{Amazon Luna}
+Amazon Luna è il servizio di cloud gaming di Amazon, lanciato nel 2020. L'abbonamento è simile a quello di Xbox Cloud Gaming o PlayStation Now, con una libreria di giochi disponibili per gli abbonati. Il servizio è disponibile su dispositivi Fire TV, PC, Mac, iOS e Android.
+
+\subsubsection{Google Stadia}
+Google Stadia è stato un servizio di cloud gaming sviluppato e gestito da Google, lanciato nel novembre 2019 e chiuso nel gennaio 2023. L'abbonamento mensile offriva una selezione di giochi gratuiti e sconti esclusivi. Gli utenti della versione gratuita, invece, potevano giocare fino a 1080p senza costi aggiuntivi, limitandosi a comprare i giochi singolarmente.
+A differenza di altri servizi, Google aveva progettato un controller Stadia specifico, che si connetteva direttamente ai server tramite Wi-Fi per ridurre la latenza di input.
+
+Nonostante l'innovatività delle sue funzioni, Stadia ha incontrato critiche per la limitata disponibilità di giochi e la mancanza di titoli esclusivi. Di conseguenza, Google ha annunciato la chiusura della piattaforma a gennaio 2023, offrendo rimborsi per gli acquisti di hardware e software effettuati tramite il proprio store.
 
 \chapter{Prospettive, Sviluppi e Applicazioni futuri del Desktop Remoto}
 % -- IA upscaling per ridurre latenza, Edge Computing, Fog Computing, AR VR, Blockchain?
