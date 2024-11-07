@@ -20,6 +20,7 @@
 \acrodef{SaaS}{Software as a Service}
 \acrodef{GaaS}{Gaming as a Service}
 \acrodef{FPS}{First Person Shooter}
+\acrodef{SLA}{Service Level Agreement}
 
 
 \school{\unibo}
@@ -322,7 +323,7 @@ il formato dei pixel, i metodi di codifica supportati e altre impostazioni.
 Dopo la negoziazione, la sessione viene avviata e il client richiede il primo aggiornamento del framebuffer \cite{richardson1998vnc}.
 
 \subsection{Remote Desktop Protocol}
-
+\label{sec:rdp}
 \ac{RDP} è un protocollo proprietario sviluppato da Microsoft per l'accesso remoto a sistemi Windows.
 Viene introdotto nel 1998 con Windows NT 4.0 Terminal Server Edition e successivamente integrato in tutte le versioni successive di Windows (ad eccezione delle versioni Home).
 
@@ -473,7 +474,7 @@ Di seguito si esamineranno le principali applicazioni delle tecnologie di deskto
 
 Smart Working è un neologismo che indica una modalità di lavoro flessibile finalizzata ad aumentare la produttività e il benessere dei lavoratori \footnote{\emph{Smart Working} - \emph{Treccani}: \url{https://www.treccani.it/vocabolario/smart-working_(Neologismi)/}}, sfruttando le tecnologie digitali per consentire ai dipendenti di lavorare in modo autonomo e flessibile, spesso da remoto.
 
-L'adozione dello smart working ha visto una cresita esponenziale negli ultimi anni, sopratutto a seguito della pandemia di COVID-19, che ha reso necessario il lavoro da remoto per garantire la continuità operativa delle aziende. Anche adesso che la crisi sanitaria è terminata, molte aziende, vedendo i benefici che il lavoro da remoto ha portato, hanno deciso di adottare il modello ibrido o completamente remoto.
+L'adozione dello smart working ha visto una crescita esponenziale negli ultimi anni, sopratutto a seguito della pandemia di COVID-19, che ha reso necessario il lavoro da remoto per garantire la continuità operativa delle aziende. Anche adesso che la crisi sanitaria è terminata, molte aziende, vedendo i benefici che il lavoro da remoto ha portato, hanno deciso di adottare il modello ibrido o completamente remoto.
 
 \paragraph{L'Importanza del Desktop Remoto nello Smart Working}
 Ovviamente le tecnologie di desktop remoto ricoprono un ruolo fondamentale in questo contesto, permettendo ai lavoratori di accedere alle workstation aziendali da remoto, rendendo agevole il passaggio tra lavoro in ufficio e lavoro da casa. Il dipendente può quindi connettersi ad una macchina aziendale da un dispositivo personale, oppure l'azienda può fornire un dispositivo dedicato, come un laptop poco potente ed economico, che si connette ad un server aziendale tramite desktop remoto, agendo quindi come un thin client.
@@ -483,7 +484,7 @@ Ovviamente le tecnologie di desktop remoto ricoprono un ruolo fondamentale in qu
 Prima del 2020, solo il 5\% dei giorni lavorativi veniva svolto da remoto negli Stati Uniti. Con la pandemia, tale percentuale è aumentata in modo sostanziale, arrivando al 25\% nel 2023. Questo fenomeno ha evidenziato l'importanza degli strumenti fin'ora citati, che hanno avuto un ruolo fondamentale nell'affrontare la crisi sanitaria senza compromettere la produttività \cite{Barrero2023}.
 
 \paragraph{Futuro del Desktop Remoto nel Lavoro da Remoto}
-È normale aspettarsi che l'uso del desktop remoto continui a crescere nei prossimi anni. A partire dagli anni '60, la percentuale di lavoratori che svolgono almeno una parte del loro lavoro da remoto è all'incirca raddoppiata ogni 15 anni. Se questa tendenza dovesse continuare, si stima che il 30\%-40\% dei giorni lavorativi potrebbero essere svolti da remoto nei prossimi decenni \cite{Barrero2023}.
+È normale aspettarsi che l'uso del desktop remoto in ottica di smart working continui a crescere nei prossimi anni. A partire dagli anni '60, la percentuale di lavoratori che svolgono almeno una parte del loro lavoro da remoto è all'incirca raddoppiata ogni 15 anni. Se questa tendenza dovesse continuare, si stima che il 30\%-40\% dei giorni lavorativi potrebbero essere svolti da remoto nei prossimi decenni \cite{Barrero2023}.
 
 
 
@@ -494,18 +495,18 @@ L'assistenza remota rappresenta una delle applicazioni più diffuse delle tecnol
 
 Nel contesto aziendale, l'assistenza remota permette al personale tecnico di fornire supporto ai dipendenti senza doversi spostare fisicamente tra gli uffici o recarsi presso le sedi dei clienti. Tale supporto risulta particolarmente utile per le aziende che vendono software, poiché i tecnici possono utilizzare strumenti di desktop remoto per mostrare ai clienti l'uso corretto di un'applicazione o per risolvere eventuali problemi in tempo reale. 
 
-Anche in ambito domestico, l'assistenza remota è ampiamente utilizzata per risolvere problematiche informatiche a distanza. Un tecnico autorizzato, o anche un conoscente, può accedere al dispositivo dell’utente per fornire supporto tramite software specifici come \textit{Quick Assist}, preinstallato sui sistemi Windows 10 e 11.
+Anche in ambito domestico, l'assistenza remota è ampiamente utilizzata per risolvere problematiche informatiche a distanza. Un tecnico autorizzato, o anche un conoscente, può accedere al dispositivo dell’utente per fornire supporto tramite software specifici come \textit{Quick Assist} (che utilizza RDP, vedi \ref{sec:rdp}), preinstallato sui sistemi Windows 10 e 11.
 
 
 
 \section{Infrastructure as a Service}
 \label{sec:iaas}
-Un possibile e diffuso utilizzo delle tecnologie di desktop remoto è il suo impiego all'interno di servizi di cloud computing, in particolare nell'ambito dell'Infrastructure as a Service (IaaS).
+Un possibile e diffuso utilizzo delle tecnologie di desktop remoto è il suo impiego all'interno di servizi di cloud computing, in particolare nell'ambito dell'\ac{IaaS}.
 Infrastructure as a Service è un termine che indica un modello di servizio dove un fornitore di servizi cloud mette a disposizione degli utenti risorse hardware virtualizzate, come server, reti, spazio di archiviazione e sistemi operativi, su richiesta. In poche parole permette all'utente di noleggiare un'infrastruttura IT completa, senza dover acquistare o gestire fisicamente hardware e strutture di rete.
 
 \subsection{Caratteristiche di IaaS}
-Un provide di servizi IaaS mette a disposizione dell'utente l'hardware (tipicamente virtualizzato), i servizi amministrativi per la gestione delle risorse e una piattaforma per poter eseguire applicativi (come sistemi operativi).
-Come ogni servizio di cloud computing, IaaS ricade sotto queste cinque caratteristiche fondamentali:
+Un provider di servizi \ac{IaaS} mette a disposizione dell'utente l'hardware (tipicamente virtualizzato), i servizi amministrativi per la gestione delle risorse e una piattaforma per poter eseguire applicativi (come sistemi operativi).
+Come ogni servizio di cloud computing, \ac{IaaS} ricade sotto queste cinque caratteristiche fondamentali\cite{bhardwaj2010cloud}:
 \begin{itemize}
     \item \textbf{Self-service on demand}: l'utente può richiedere e configurare risorse in modo autonomo, senza l'intervento del fornitore;
     \item \textbf{Ampio accesso alla rete}: le risorse sono accessibili tramite Internet o una rete privata;
@@ -513,7 +514,7 @@ Come ogni servizio di cloud computing, IaaS ricade sotto queste cinque caratteri
     \item \textbf{Risorse scalabili}: le risorse possono essere allocate e deallocate rapidamente in base alle esigenze;
     \item \textbf{Misurabilità del servizio}: l'uso delle risorse può essere monitorato e misurato, consentendo una gestione efficiente dei costi.
 \end{itemize}
-Questo porta a una serie di vantaggi per le aziende o gli utenti che ne fanno uso, tra cui:
+Questo porta a una serie di vantaggi per le aziende o gli utenti che ne fanno uso, tra cui\cite{bhardwaj2010cloud}:
 \begin{itemize}
     \item \textbf{Costo incrementale}: l'utente paga solo per le risorse effettivamente utilizzate e per il tempo di utilizzo;
     \item \textbf{Ampio storage}: possibilità di archiviare grandi quantità di dati in modo scalabile;
@@ -524,24 +525,23 @@ Questo porta a una serie di vantaggi per le aziende o gli utenti che ne fanno us
 
 \subsection{Provider e Cliente}
 \label{subsec:provider_cliente}
-Nel modello Infrastructure as a Service (IaaS), gli attori principali sono il \textbf{Provider} e il \textbf{Cliente}. Il Provider è responsabile della gestione dell'infrastruttura fisica e virtuale, come server, macchine virtuali, rete e sistemi di archiviazione. Inoltre si occupa della manutenzione e degli aggiornamenti dei software e sistema operativo 
+Nel modello \ac{IaaS}, gli attori principali sono il \textbf{Provider} e il \textbf{Cliente}. Il Provider è responsabile della gestione dell'infrastruttura fisica e virtuale, come server, macchine virtuali, rete e sistemi di archiviazione. Inoltre si occupa della manutenzione e degli aggiornamenti dei software e sistema operativo\cite{bhardwaj2010cloud}.
+Il livello di servizio viene formalizzato in specifici \ac{SLA}, che stabiliscono standard di disponibilità e prestazioni.
 
-Nel modello Infrastructure as a Service (IaaS), il \textbf{Provider} e il \textbf{Cliente} svolgono ruoli distinti e complementari. Il Provider è responsabile della gestione dell'infrastruttura fisica e virtuale, come server, rete e sistemi di archiviazione. Inoltre, il Provider si occupa del monitoraggio continuo delle risorse, della manutenzione e degli aggiornamenti, così come della scalabilità, permettendo al Cliente di aumentare o ridurre le risorse in base alle proprie necessità. Il livello di servizio viene formalizzato in specifici SLA (Service Level Agreements), che stabiliscono standard di disponibilità e prestazioni.
-
-Dall'altra parte, il Cliente gestisce le proprie applicazioni e dati all'interno dell'infrastruttura fornita. Pur non essendo coinvolto nella gestione dell'hardware, il Cliente è responsabile della configurazione del software, della protezione dei dati e dell'accesso sicuro alle applicazioni.
+Il Cliente invece si occupa della gestione delle proprie applicazioni e dati all'interno dell'infrastruttura fornita\cite{bhardwaj2010cloud}.
 
 \subsection{Desktop as a Service}
 \label{subsec:daas}
-Desktop as a Service (DaaS) è un modello di cloud computing in cui un provider fornisce desktop virtuali accessibili via Internet. A differenza di IaaS, che mette a disposizione risorse infrastrutturali di base come server e storage su cui un cliente può costruire e gestire autonomamente il proprio ambiente IT, DaaS offre un ambiente desktop pronto all'uso, ideale per utenti finali che necessitano di un accesso immediato a un sistema completo senza doversi occupare di configurazioni hardware.
+Desktop as a Service (DaaS) è un modello di cloud computing in cui un provider fornisce desktop virtuali accessibili via Internet. A differenza di \ac{IaaS}, che mette a disposizione risorse infrastrutturali di base come server e storage su cui un cliente può costruire e gestire autonomamente il proprio ambiente IT, DaaS offre un ambiente desktop pronto all'uso, ideale per utenti finali che necessitano di un accesso immediato a un sistema completo senza doversi occupare di configurazioni hardware.
 
 \subsubsection{Similitudini e differenze con IaaS}
-Entrambi i modelli offrono scalabilità e gestione centralizzata, permettendo di pagare solo per le risorse effettivamente utilizzate. Tuttavia, mentre in IaaS il Cliente è responsabile del sistema operativo e delle applicazioni, in DaaS il provider gestisce interamente il desktop, inclusi aggiornamenti e sicurezza. Questo rende DaaS una soluzione più semplice e immediata, particolarmente utile per scenari di lavoro remoto.
+Entrambi i modelli offrono scalabilità e gestione centralizzata, permettendo di pagare solo per le risorse effettivamente utilizzate. Tuttavia, mentre in \ac{IaaS} il Cliente è responsabile del sistema operativo e delle applicazioni, in DaaS il provider gestisce interamente il desktop, inclusi aggiornamenti e sicurezza. Questo rende DaaS una soluzione più semplice e immediata, particolarmente utile per scenari di lavoro remoto.
 
 \subsubsection{Vantaggi di DaaS e Desktop Remoto}
-DaaS offre accessibilità da qualsiasi dispositivo, maggiore sicurezza dei dati grazie alla gestione centralizzata, e una riduzione dei costi di manutenzione. In sintesi, IaaS è ideale per chi necessita di infrastrutture flessibili, mentre DaaS è pensato per chi cerca un desktop virtuale pronto all'uso.
+DaaS offre accessibilità da qualsiasi dispositivo, maggiore sicurezza dei dati grazie alla gestione centralizzata, e una riduzione dei costi di manutenzione. In sintesi, \ac{IaaS} è ideale per chi necessita di infrastrutture flessibili, mentre DaaS è pensato per chi cerca un desktop virtuale pronto all'uso.
 
-Rispetto ad una soluzione IaaS, DaaS potrebbe essere meno flessibile per quanto riguarda la scelta del sistema operativo e applicazioni, ma guadagna in semplicità e immediatezza d'uso.
-Prendiamo in esempio un 3D artist che necessita di un ambiente di lavoro con una GPU potente per eseguire rendering complessi. Con una soluzione IaaS, l'artista potrebbe configurare un server con una GPU dedicata e installare il software necessario. Con DaaS, invece, potrebbe accedere a un desktop virtuale già configurato con le specifiche richieste, senza dover gestire l'infrastruttura sottostante.
+Rispetto ad una soluzione \ac{IaaS}, DaaS potrebbe essere meno flessibile per quanto riguarda la scelta del sistema operativo e applicazioni, ma guadagna in semplicità e immediatezza d'uso.
+Prendiamo in esempio un 3D artist che necessita di un ambiente di lavoro con una GPU potente per eseguire rendering complessi. Con una soluzione \ac{IaaS}, l'artista potrebbe configurare un server con una GPU dedicata e installare il software necessario. Con DaaS, invece, potrebbe accedere a un desktop virtuale già configurato con le specifiche richieste, senza dover gestire l'infrastruttura sottostante.
 Abbinando un sistema scalabile, immediato e on-demand come DaaS con una tecnologia di desktop remoto a bassa latenza, DaaS diventa un'alternativa competitiva rispetto all'acquisto di hardware fisico costoso e alla gestione di un'infrastruttura IT complessa.
 
 Inoltre bisogna considerare che un utente può accedere al proprio desktop virtuale da qualsiasi dispositivo connesso a Internet.
@@ -552,15 +552,15 @@ Poter accedere da un laptop in treno, successivamente dalla workstation in uffic
 L'industria dei videogiochi ha visto una enorme crescita negli ultimi anni, sopratutto per quanto riguarda la potenza di calcolo richiesta per eseguire i giochi più recenti. Molti di questi, sopratutto i tripla A (termine utilizzato per indicare giochi con un budget di sviluppo molto alto), utilizzano modelli 3D complessi, texture ad alta risoluzione e tecnologie come il ray tracing, che migliorano notevolmente la qualità grafica ma richiedono una potenza di calcolo molto elevata.
 Hardware in grado di supportare questi giochi può essere molto costoso, e non tutti gli utenti possono permettersi di acquistare una GPU di fascia alta o un computer con specifiche tecniche elevate.
 Per questo ed altri motivi che vedremo in seguito, il cloud gaming è diventato una soluzione sempre più popolare.
-Cloud Gaming, anche noto come Gaming as a Service (GaaS), è un servizio di cloud computing che permette agli utenti di giocare a videogiochi su server remoti, trasmettendo il flusso video del gioco a bassa latenza su dispositivi client di vario tipo. \cite{HARLE2023}
+Cloud Gaming, anche noto come \ac{GaaS}, è un servizio di cloud computing che permette agli utenti di giocare a videogiochi su server remoti, trasmettendo il flusso video del gioco a bassa latenza su dispositivi client di vario tipo. \cite{HARLE2023}
 
 \subsection{Funzionamento}
 \label{subsec:funzionamento}
 
-Il funzionamento del cloud gaming si basa sull'architettura del cloud computing, che permette di eseguire i giochi in remoto su server e di trasmettere in streaming il video generato all'utente finale. Questo modello, noto come Gaming as a Service (GaaS), sfrutta i modelli di servizio IaaS, PaaS e SaaS per offrire un servizio scalabile e facile da utilizzare.
+Il funzionamento del cloud gaming si basa sull'architettura del cloud computing, che permette di eseguire i giochi in remoto su server e di trasmettere in streaming il video generato all'utente finale. Questo servizio sfrutta i modelli di servizio \ac{IaaS}, PaaS e SaaS per offrire un servizio scalabile e facile da utilizzare.
 
 \subsubsection{Infrastructure as a Service (IaaS)}
-in GaaS, i provider utilizzano IaaS per fornire l'infrastruttura hardware necessaria. Le risorse includono server con CPU e GPU potenti in grado di eseguire i giochi più "pesanti". Grazie a IaaS, i provider possono gestire dinamicamente l'allocazione delle risorse, adattandole in tempo reale alla domanda e ottimizzando i costi. Inoltre potendo distribuire i server in data center in tutto il mondo, è possibile ridurre la latenza e distribuire il carico in modo efficiente \cite{HARLE2023}.
+In GaaS, i provider utilizzano \ac{IaaS} per fornire l'infrastruttura hardware necessaria. Le risorse includono server con CPU e GPU potenti in grado di eseguire i giochi più "pesanti". Grazie a IaaS, i provider possono gestire dinamicamente l'allocazione delle risorse, adattandole in tempo reale alla domanda e ottimizzando i costi. Inoltre potendo distribuire i server in data center in tutto il mondo, è possibile ridurre la latenza e distribuire il carico in modo efficiente \cite{HARLE2023}.
 
 \subsubsection{Platform as a Service (PaaS)}
 PaaS può essere utilizzato dagli sviluppatori di videogiochi per avere un ambiente stabile e scalabile su cui sviluppare e testare i giochi senza doversi preoccupare dell'hardware sottostante. I provider forniscono piattaforme con librerie, strumenti e software necessari per lo sviluppo di giochi \cite{HARLE2023}.
@@ -590,8 +590,8 @@ Il Cloud Gaming condivide molti degli stessi vantaggi e svantaggi dei servizi Ia
 \paragraph{Manutenzione ed aggiornamenti} Le piattaforme di cloud gaming possono applicare aggiornamenti e patch in modo centralizzato, garantendo che tutti gli utenti abbiano sempre accesso alla versione più recente del gioco. Inoltre, la manutenzione dell'hardware è a carico del provider, riducendo i costi e i tempi di inattività per l'utente.
 
 \subsubsection{Svantaggi}
-\paragraph{Latenza} Per quanto fino ad ora abbiamo parlato di come tecnologie recenti abbiamo portato la latenza a livelli impensabili fino a qualche anno fa, questa rimane comunque un problema per il cloud gaming. Anche se molto bassa, quando si parla di gaming, anche pochi millisecondi possono fare la differenza. In giochi \ac{FPS}, la reattività è fondamentale, sopratutto in multiplayer, dove pochi millisecondi in meno danno un vantaggio competitivo considerevole. Purtroppo la latenza è un problema intrinseco del cloud gaming, e nonostante i continui miglioramenti, non può essere completamente eliminata. Sia chiaro però che il caso dei giochi \ac{FPS} è un caso limite; per la maggior parte dei giochi, la latenza è più che accettabile e non influisce sull'esperienza di gioco, anche se queste sono valutazioni molto soggettive.
-\paragraph{Larghezza di banda e Requisiti di connessione} Il cloud gaming richiede una connessione relativamente veloce e stabile per garantire un'esperienza di gioco fluida. Lo scenario ideale sarebbe una connessione cablata e un contratto FTTH in quanto in questo modo la banda è garantita e la latenza è molto bassa.
+\paragraph{Latenza} Per quanto fino ad ora abbiamo parlato di come tecnologie recenti abbiamo portato la latenza a livelli impensabili fino a qualche anno fa, questa rimane comunque un problema per il cloud gaming. Anche se molto bassa, quando si parla di gaming, anche pochi millisecondi possono fare la differenza. In giochi \ac{FPS}, la reattività è fondamentale, sopratutto in multiplayer, dove pochi millisecondi di latenza in meno danno un vantaggio competitivo considerevole. Purtroppo la latenza è un problema intrinseco del cloud gaming, e nonostante i continui miglioramenti, non può essere completamente eliminata. Sia chiaro però che i giochi \ac{FPS} sono un caso limite; per la maggior parte dei giochi, la latenza è più che accettabile e non influisce sull'esperienza di gioco, anche se queste sono valutazioni molto soggettive.
+\paragraph{Larghezza di banda e Requisiti di connessione} Il cloud gaming richiede una connessione relativamente veloce e stabile per garantire un'esperienza di gioco fluida. Lo scenario ideale sarebbe una connessione cablata e un contratto FTTH in quanto in questo modo la banda è garantita e la latenza è molto bassa. A partire dal 2020, secondo Steam Hardware Survey\footnote{Steam Hardware Survey: \url{https://store.steampowered.com/hwsurvey/}}, la percentuale di utenti che utilizzano un monitor con risoluzione 1080p è scesa dal 64.58\% al 57.32\% mentre la percentuale di utenti con monitor 1440p è salita dal 4.92\% al 19.71\% (dati di ottobre 2019 e ottobre 2024). Questo significa che sempre più utenti stanno adottando monitor con risoluzioni più alte, che richiedono un bitrate maggiore per garantire la stessa qualità video.
 
 \subsection{Principali Servizi di Cloud Gaming}
 In una industria redditizia come quella dei videogiochi, in cui il valore del mercato globale è stimato a circa 184 miliardi di dollari nel 2023 secondo \href{https://www.gamesindustry.biz/gamesindustrybiz-presents-the-year-in-number-2023}{GameIndustry.biz}, non sorprende che molte aziende tech abbiano investito nel cloud gaming. Di seguito sono elencati alcuni dei principali servizi di cloud gaming attualmente disponibili sul mercato.
@@ -600,6 +600,7 @@ In una industria redditizia come quella dei videogiochi, in cui il valore del me
 GeForce Now è probabilmente il leader del mercato del cloud gaming. NVIDIA, nota azienda produttrice di GPU, lancia NVIDIA GeForce Now (precedentemente chiamato NVIDIA Grid) nel 2013, come software beta per i dispositivi Shield. Viene poi rilasciato ufficialmente nel 2015. Questo servizio permetteva agli utenti abbonati di avere accesso illimitato ad una libreria limitata di giochi disponibile nei server NVIDIA.
 Nel 2017, NVIDIA lancia GeForce Now per Windows e Mac, e successivamente, nel 2019, per Android. Nel 2019 viene cambiato il modello di business; ora l'utente non pagava più un abbonamento mensile per avere accesso ad una libreria di giochi, ma poteva giocare ai propri giochi acquistati su Steam, Epic Games Store, Uplay e altri store, su server NVIDIA. I piani di abbonamento differiscono per il tempo di gioco massimo continuativo e per la potenza della GPU a disposizione.
 Il servizio esce completamente dalla fase beta nel 2020.
+GeForce Now è rinomato per la sua bassa latenza e possibilità di trasmettere video ad alte risoluzioni (fino a 4K) e frame rate rispetto ad altri servizi di cloud gaming.
 
 \subsubsection{Xbox Cloud Gaming}
 Xbox Cloud Gaming, precedentemente noto come Project xCloud, è un servizio di cloud gaming sviluppato da Microsoft e incluso nel servizio Xbox Game Pass Ultimate. Viene rilasciato in beta nel 2019 e ufficialmente nel 2020. Il modello di business consiste nel pagare un abbonamento mensile per avere accesso ad una libreria di giochi disponibili su Xbox Game Pass, che include alcuni titoli di Xbox e PC. Il servizio è disponibile su dispositivi Android, iOS, Windows, Mac, browser e molti altri dispositivi.
