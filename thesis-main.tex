@@ -25,17 +25,13 @@
 
 \school{\unibo}
 \programme{Corso di Laurea Triennale in Ingegneria e Scienze Informatiche}
-\title{Evoluzione delle Tecnologie di Desktop Remoto}
+\title{Tecnologie di Desktop Remoto: Evoluzione, Applicazioni Moderne e Prospettive Future}
 \author{Matteo Susca}
 \date{\today}
 \subject{Reti di Telecomunicazioni}
 \supervisor{Prof. Franco Callegati}
 \session{III}
 \academicyear{2023-2024}
-
-% Definition of acronyms
-\acrodef{IoT}{Internet of Thing}
-\acrodef{vm}[VM]{Virtual Machine}
 
 
 \mainlinespacing{1.241} % line spacing in mainmatter, comment to default (1)
@@ -45,12 +41,12 @@
 \frontmatter\frontispiece
 
 \begin{abstract}
-    Negli ultimi decenni, le tecnologie di desktop remoto hanno acquisito crescente rilevanza, trovando applicazione in diversi ambiti, dallo smart working al cloud gaming. Questa tesi si propone di analizzare l’evoluzione e lo stato attuale delle principali tecnologie di desktop remoto, illustrandone i principali protocolli, le caratteristiche e le gli aspetti innovativi. Le prime tecnologie di accesso remoto come l'X Window System e il protocollo VNC hanno aperto la strada a soluzioni moderne come Parsec, ottimizzate per contesti in cui le latenze sono un fattore critico.
+    Negli ultimi decenni, le tecnologie di desktop remoto hanno acquisito crescente rilevanza, trovando applicazione in diversi ambiti, dallo smart working al cloud gaming. Questa tesi si propone di analizzare l’evoluzione e lo stato attuale delle principali tecnologie di desktop remoto, illustrandone i principali protocolli, le caratteristiche e le gli aspetti innovativi. 
     
-    Questi strumenti trovano applicazione in diversi contesti moderni, come il telelavoro e l'assistenza remota, dimostrando come la loro adozione possa migliorare 
-
+    Le prime tecnologie di accesso remoto come l'X Window System e il protocollo VNC hanno aperto la strada a soluzioni moderne come Parsec, ottimizzate per contesti in cui le latenze sono un fattore critico.
+    
     L'applicazione di questi strumenti in contesti moderni come il telelavoro e l'assistenza remota, porta alla luce alcuni innegabili vantaggi, come l'abbattimento dei costi e l'aumento della produttività.
-    %TODO IAAS
+
     Tecnologie di desktop remoto vengono frequentemente utilizzate in combinazione a servizi di cloud computing permettondo l'accesso ad un ambiente desktop completo invece di un terminale o singole applicazioni. Questo approccio unisce i vantaggi di scalabilità di un servizio Infrastructure as a Service (IaaS) e la flessibilità di utilizzo offerta dal desktop remoto.
 
     Verranno infine illustrate possibili prospettive future e l'influenza che tecnologie emergenti come la realtà aumentata e le reti 5G potrebbero avere sulle tecnologie di desktop remoto.
@@ -58,16 +54,14 @@
     
 
 \begin{dedication} % this is optional
-Dedicato a me stesso,
 
-senza il quale non sarei riuscito
+%TODO
 
-a scrivere questa tesi.
 \end{dedication}
 
 %----------------------------------------------------------------------------------------
 \tableofcontents   
-% \listoffigures     % (optional) comment if empty
+\listoffigures     % (optional) comment if empty
 % \lstlistoflistings % (optional) comment if empty
 %----------------------------------------------------------------------------------------
 
@@ -77,21 +71,28 @@ a scrivere questa tesi.
 \chapter{Introduzione}
 \label{chap:introduction}
 
+Il desiderio di connettersi da remoto ad un \ac{PC} è una necessità che si è manifestata fin dai primi anni dell'informatica.
+Già negli anni '70, insieme al progetto ARPANET, si iniziò a pensare a come poter accedere a terminali remoti tramite una connessione di rete, successivamente implementata con il protocollo Telnet.
+Ovviamente ai giorni nostri, in molti casi, non basta più accedere solamente alla shell di un computer remoto, ma è necessario poter interagire con un'interfaccia grafica.
+%
+Le esigenze di accesso remoto sono cambiate col tempo e continuano a cambiare oltre ad essere diverse a seconda del contesto in cui ci si trova.
 Al giorno d'oggi, è sempre più comune incontrare realtà lavorative che offrono la possibilità di lavorare da remoto.
-%
-La possibilità di connettersi ad un computer aziendale da qualsiasi dispositivo connesso a internet comporta numerosi e innegabili vantaggi,
-come l'accesso diretto alla rete aziendale,
-l'utilizzo di hardware specifico per alcune attività senza doverlo trasportare fisicamente,
+La possibilità di connettersi ad un computer aziendale da qualsiasi dispositivo connesso a internet comporta numerosi e innegabili vantaggi, 
+come l'accesso diretto alla rete aziendale, l'utilizzo di hardware specifico per alcune attività senza doverlo trasportare fisicamente,
 e la flessibilità di lavorare da casa o in mobilità.
-%
-Tutto questo è reso possibile dalle tecnologie di desktop remoto, che permettono di controllare un computer da un altro dispositivo, ovunque esso si trovi, come se ci si trovasse fisicamente davanti ad esso.
+
+Tutto ciò è possibile grazie alle tecnologie di desktop remoto, che permettono di controllare un computer da un altro dispositivo, ovunque esso si trovi, come se ci si trovasse fisicamente davanti ad esso.
 
 Anche nell'industria videoludica le tecnologie di desktop remoto ricoprono un ruolo importante.
-%
+
 Il cloud gaming,
-ad esempio, è un servizio che permette di giocare a videogiochi in streaming,
+ad esempio, è un tipo di servizio che permette di giocare a videogiochi in streaming,
 sfruttando la potenza di calcolo di un server remoto.
-%
+
+Un videogiocatore che vuole giocare in mobilità ha esigenze diverse da un utente che lavora da casa,
+o da un tecnico che deve risolvere un problema su un computer remoto.
+Anche per questo motivo, nel corso degli anni sono stati sviluppati molteplici protocolli e tecnologie con funzionalità e caratteristiche diverse.
+
 Il colosso tecnologico NVIDIA,
 uno dei principali attori in questo settore,
 ha dimostrato fin dal 2013 con il servizio NVIDIA GRID di essere in grado di offrire un'esperienza di gioco fluida e di alta qualità,
@@ -123,10 +124,6 @@ come un \ac{PC},
 un tablet o uno smartphone. % definizione da Desktop Virtualization Frederic P. Miller
 Quando invece di un server centrale si utilizza un altro computer come host,
 si parla specificamente di desktop remoto.
-Questa tecnologia consente di gestire e controllare da remoto un computer come se ci si trovasse di fronte ad esso fisicamente.
-%
-Le tecnologie di desktop remoto hanno subito notevoli cambiamenti nel corso degli anni,
-evolvendosi in base alle esigenze emergenti e ai progressi tecnologici.
 %
 Oggi esistono numerosi protocolli tra cui scegliere,
 ciascuno con le proprie caratteristiche e peculiarità,
@@ -137,23 +134,8 @@ rispondendo alle diverse esigenze di utilizzo.
 
 \chapter{Evoluzione delle Tecnologie di Desktop Remoto}
 \label{chap:evolution}
-Il desiderio di connettersi da remoto ad un \ac{PC} è una necessità che si è manifestata fin dai primi anni dell'informatica.
-Già negli anni '70,
-insieme al progetto ARPANET, si iniziò a pensare a come poter accedere a terminali remoti tramite una connessione di rete,
-successivamente implementata con il protocollo Telnet.
-Ovviamente ai giorni nostri, in molti casi, non basta più accedere solamente alla shell di un computer remoto,
-ma è necessario poter interagire con un'interfaccia grafica.
-%
-Infatti le esigenze di accesso remoto sono cambiate col tempo e continuano a cambiare.
-Sono inoltre diverse a seconda del contesto in cui ci si trova:
-un utente che lavora da casa ha esigenze diverse da un gamer che vuole giocare in mobilità,
-o da un tecnico che deve risolvere un problema su un computer remoto.
-Anche per questo motivo, nel corso degli anni sono stati sviluppati molteplici protocolli e tecnologie con funzionalità e caratteristiche diverse.
-
-\section{Primi Sviluppi e Tecnologie nell'ambito dell'Accesso Remoto}
 Negli anni '80 esistevano già tecnologie che permettevano di accedere ad un terminale remoto da una macchina locale.
-Alcune macchine erano adibite solamente alla connessione con un terminale remoto;
-queste macchine erano chiamate \emph{dumb terminal} o \emph{thin client}.
+Alcune macchine erano adibite solamente a questo compito ed erano chiamate \emph{dumb terminal} o \emph{thin client}.
 %
 Quest'ultimo termine è ancora utilizzato oggi per indicare un dispositivo che si connette ad un server remoto per eseguire applicazioni e accedere a risorse di rete.
 Con l'introduzione e aumento di sistemi operativi con interfaccia grafica, era inevitabile la conseguente evoluzione delle tecnologie di accesso remoto.
@@ -161,6 +143,7 @@ Con l'introduzione e aumento di sistemi operativi con interfaccia grafica, era i
 Fu infatti nel 1984 che fu introdotto, dal Massachusetts Institute of Technology, il X Window System, successore del W Window System.
 
 \section{Analisi e Funzionamento delle Principali Tecnologie di Desktop Remoto} 
+Verranno ora analizzate le principali tecnologie di desktop remoto in ordine cronologico, illustrando la loro storia e il funzionamento.
 
 \subsection{X Window System}
 X Window System, noto anche come X o X11, è un sistema di finestre che consente di eseguire applicazioni grafiche localmente o su computer remoti tramite una architettura client-server. 
@@ -168,7 +151,7 @@ Nasce dall'esigenza comune di due progetti del MIT,
 Athena e il Laboratory for Computer Science,
 di avere un sistema che permettesse di accedere a risorse grafiche distribuite su una rete di workstation eterogenee, indipendentemente dall'hardware o dal sistema operativo utilizzato \cite{Scheifler1986}.
 %
-Il nome "X" deriva dal suo predecessore,
+Il nome ``X'' deriva dal suo predecessore,
 W Window System,
 sviluppato presso l'Università di Stanford.
 %
@@ -193,7 +176,7 @@ X è una collezione di software che si posizionano tra il kernel e altri softwar
 X si basa su una architettura client-server dove il server è in esecuzione sulla macchina che ospita l'interfaccia grafica e il client è l'applicazione che richiede servizi grafici \cite{Scheifler1986}.
 %
 Questa terminologia può sembrare controintuitiva in quanto chi non ha familiarità con il sistema X potrebbe pensare che sia invertita.
-In realtà il tutto deve essere visto dal punto di vista delle applicazioni: queste richiedono servizi grafici e I/O al server X.
+In realtà il tutto deve essere osservato dal punto di vista delle applicazioni: queste richiedono servizi grafici e I/O al server X.
 I client possono essere locali o remoti. Ogni server X può connettersi a molteplici client.
 % immagine architettura X Window System
 \begin{figure}
@@ -212,13 +195,14 @@ ma spesso vengono utilizzati altri canali comunicativi come Unix domain sockets 
 Indipendentemente dal canale utilizzato, è necessario che questo sia affidabile e che garantisca l'integrità e l'ordine dei messaggi,
 in quanto il protocollo X non implementa nativamente meccanismi di ritrasmissione o di ordinamento dei pacchetti.
 %
-Quando un client si connette a un server X, avviene una fase di handshake che stabilisce la connessione e verifica l'autenticazione del client. Successivamente, il client può inviare richieste al server, come la creazione di finestre, il disegno di elementi grafici, o la gestione dell'input. Le richieste vengono accumulate in un buffer e inviate in modo asincrono per migliorare l'efficienza della comunicazione. Il server gestisce le richieste di più client contemporaneamente, garantendo l'isolamento tra loro, ma non fornisce alcuna garanzia di ordinamento tra client differenti, a meno che non venga esplicitamente richiesto.
+
+Quando un client si connette a un server X, avviene una fase di handshake che stabilisce la connessione e ne verifica l'autenticazione. Successivamente, il client può inviare richieste al server, come la creazione di finestre, il disegno di elementi grafici, o la gestione dell'input. Le richieste vengono accumulate in un buffer e inviate in modo asincrono per migliorare l'efficienza della comunicazione. Il server gestisce più client contemporaneamente, garantendo l'isolamento tra loro, ma non fornisce alcuna garanzia di ordinamento tra client differenti, a meno che non venga esplicitamente richiesto.
 
 A differenza di altri protocolli progettati specificamente per il desktop remoto,
 X è stato sviluppato principalmente per l'esecuzione remota di singole applicazioni grafiche,
 piuttosto che per la gestione completa di un ambiente desktop (Desktop Environment, DE).
 %
-Per eseguire un intero DE in remoto, sarebbe necessario ricorrere a software aggiuntivi come X2Go.
+Per eseguire un intero DE in remoto, sarebbe necessario ricorrere a software aggiuntivi come X2Go\footnote{\emph{X2Go}: \url{https://wiki.x2go.org}}.
 
 Un'altra limitazione del protocollo X è l'assenza di meccanismi di compressione dei dati.
 Questo significa che i dati grafici vengono trasmessi senza ottimizzazione,
@@ -227,7 +211,6 @@ il che può causare un utilizzo eccessivo della larghezza di banda e peggiorare 
 Inoltre, tutta la parte di rendering grafico è demandata alla macchina locale su richiesta del client.
 
 \paragraph{Esempio di utilizzo di X Window System per l'esecuzione remota di applicazioni}
-
 Per comprendere meglio il funzionamento del X Window System in un contesto di desktop remoto, consideriamo un esempio concreto:
 l'esecuzione dell'applicazione di editing testuale \texttt{gedit} su un server remoto e la sua visualizzazione su un computer locale.
 Questo può essere realizzato attraverso il X forwarding con ssh, utilizzando il seguente comando:
@@ -243,7 +226,6 @@ gedit &
 \end{lstlisting}
 
 \paragraph{Funzionamento del protocollo}
-
 Quando viene eseguito il codice di \Cref{lst:ssh-x},
 il client e il server X avviano una procedura di handshake per stabilire il canale di comunicazione sicuro.
 %
@@ -266,25 +248,25 @@ Il client elabora gli eventi e, se necessario, invia aggiornamenti grafici che v
 %
 Questo flusso di comunicazione è gestito in modo asincrono, permettendo al server di accumulare richieste in un buffer e processarle in modo efficiente, ottimizzando così l'uso della rete.
 
-\subsection{Virtual Network Computing}
+Ad oggi X Window system non è molto diffuso come sistema di desktop remoto, ma è ancora il sistema grafico di default per la maggior parte delle distribuzioni Linux.
 
+\subsection{Virtual Network Computing}
 Il protocollo \ac{VNC} è uno dei più diffusi per l'accesso remoto al desktop.
 %
 Sviluppato presso il laboratorio di ricerca Olivetti \& Oracle Research Laboratory nel 1998,
 \ac{VNC} è stato inizialmente progettato per consentire l'accesso alle workstation da diversi dispositivi,
 sia all'interno che all'esterno del laboratorio.
-Sebbene X Window System offrisse già funzionalità simili, richiedeva che il dispositivo remoto eseguisse un server X,
+Sebbene X Window System offrisse già funzionalità simili, richiedeva che la macchina remota eseguisse un server X,
 che risultava spesso troppo oneroso per dispositivi con capacità di elaborazione limitate. Inoltre, X Window System era strettamente legato all'ambiente Unix \cite{richardson1998vnc}.
 
 \ac{VNC}, al contrario, è stato concepito per essere indipendente dal sistema operativo e per garantire leggerezza nell'esecuzione.
-Questo rende possibile la sua implementazione su qualsiasi dispositivo e l'accesso da qualunque altro dispositivo dotato di un client \ac{VNC},
+Questo rende possibile la sua implementazione su qualsiasi dispositivo e l'accesso da qualunque altra intefraccia dotata di un client,
 anche poco potente.
 %
 Una delle caratteristiche chiave di \ac{VNC} è la semplicità del client, che non mantiene stati complessi,
 permettendo una facile disconnessione e riconnessione senza compromettere lo stato del server o l'ambiente desktop.
 
 \subsubsection{Architettura e funzionamento}
-
 Alla base del sistema \ac{VNC} si trova il protocollo Remote Framebuffer (RFB)
 \footnote{\textbf{\ac{VNC}} - \emph{Wikipedia}: \url{https://w.wiki/BoHJ}},
 che opera a livello di framebuffer,
@@ -297,11 +279,16 @@ il server \ac{VNC} e il client \ac{VNC}.
 Il server è responsabile delle modifiche al framebuffer e ospita il sistema di finestre e le applicazioni,
 mentre il client rappresenta l'endpoint con cui l'utente interagisce attraverso il display e i dispositivi di input \cite{richardson1998vnc}.
 
-\paragraph{Rendering grafico}
+\begin{figure}
+    \centering
+    \includegraphics[width=.6\linewidth]{figures/VNC architecture.png}
+    \caption[xarch]{Architettura di \ac{VNC} \cite{richardson1998vnc}}
+\end{figure}
 
+\paragraph{Rendering grafico}
 Il sistema \ac{VNC} utilizza un metodo di rendering molto semplice, basato su una singola operazione grafica:
 \begin{quote}
-    "Posiziona un rettangolo di dati di pixel in una determinata posizione \emph{x}, \emph{y}."
+    ``Posiziona un rettangolo di dati di pixel in una determinata posizione \emph{x}, \emph{y}.''
 \end{quote}
 Questo approccio, pur sembrando inefficiente a prima vista, offre grande flessibilità grazie all'uso di diversi schemi di codifica dei dati grafici.
 %
@@ -312,7 +299,7 @@ il server \ac{VNC} invierà semplicemente una richiesta per spostare il rettango
 %
 Inoltre, \ac{VNC} utilizza tecniche di compressione dei dati per ridurre significativamente la quantità di informazioni da trasmettere.
 
-Un insieme di rettangoli di pixel modificati viene definito "framebuffer update".
+Un insieme di rettangoli di pixel modificati viene definito ``framebuffer update''.
 Ogni rettangolo può essere codificato in modo diverso,
 consentendo al server di scegliere il metodo di codifica più efficiente in base alla situazione.
 %
@@ -327,12 +314,10 @@ gli aggiornamenti saranno continui e fluidi. In caso di connessione lenta o clie
 il server ridurrà la frequenza degli aggiornamenti, causando un movimento meno fluido.
 
 \paragraph{Input}
-
 \ac{VNC} supporta un modello standard di input che include una tastiera e un dispositivo di puntamento multi-pulsante.
 Il client invia eventi di input ogni volta che un tasto viene premuto o il mouse viene mosso, permettendo al server di elaborare questi eventi e aggiornare l'interfaccia di conseguenza. \cite{richardson1998vnc}.
 
 \paragraph{Connessione e autenticazione}
-
 Quando un client richiede la connessione a un server \ac{VNC},
 il server risponde con una richiesta di autenticazione,
 generalmente basata su un meccanismo di password \textit{challenge-response}.
@@ -373,12 +358,11 @@ incapsulati e impacchettati nel protocollo di rete, per poi essere inviati al cl
 I dati ricevuti subiscono il processo inverso: vengono decapsulati, decrittografati e, infine, resi disponibili all'applicazione.
 
 \subsubsection{Connessione}
-
 La fase di connessione può essere suddivisa nelle seguenti fasi:
 \begin{enumerate}
-    \item \textbf{Inizializazione della connessione}: Il client invia un \ac{PDU} di richiesta di connessione utilizzando il protocollo X.224. Il server risponde con un \ac{PDU} di conferm di connessione.
+    \item \textbf{Inizializazione della connessione}: Il client invia un \ac{PDU} di richiesta di connessione utilizzando il protocollo X.224. Il server risponde con un \ac{PDU} di conferma di connessione.
     In questa fase viene stabilito il protocollo di sicurezza da utilizzare.
-    \item \textbf{Scambio delle Impostazioni di Base}: Tramite MCS Connect Initial \ac{PDU} e MCS Connect Response \ac{PDU},
+    \item \textbf{Scambio delle Impostazioni di Base}: Tramite \emph{MCS Connect Initial \ac{PDU}} e \emph{MCS Connect Response \ac{PDU}},
     client e server scambiano informazioni di base come la versione del protocollo, la dimesione del desktop,
     dati riguardanti la sicurezza come il server random e il certificato e informazioni di rete come il numero di canali supportati.
     \item \textbf{Connessione dei Canali}: Il client e il server stabiliscono le connessioni individuali per ogni canale virtuale previsto nella sessione,
@@ -392,7 +376,7 @@ La fase di connessione può essere suddivisa nelle seguenti fasi:
     \item \textbf{Scambio delle Funzionalità supportate}: Il server e il client scambiano informazioni sui rispettivi tipi di capacità supportati, come codec per bitmap,
     supporto per tastiera e mouse, e configurazioni generali.
     \item \textbf{Finalizzazione della Connessione}: Il client e il server completano la connessione attraverso una serie di \ac{PDU}s per sincronizzare i rispettivi identificatori utente e definire il controllo condiviso della sessione.
-    \item \textbf{Scambio dei Dati}: Una volta stabilita la connessione, il client invia dati di input (come tastiera e mouse) e riceve output grafico dal server,
+    \item \textbf{Scambio dei Dati}: Una volta stabilita la connessione, il client invia dati di input e riceve output grafico dal server,
     con l’opzione di utilizzare la compressione per ridurre il traffico dati.
 \end{enumerate}
 
@@ -412,7 +396,7 @@ Questo scambio di dati avviene attraverso due modalità: \textit{slow-path} e \t
 \ac{RDP} si avvale di diversi canali per la trasmissione di dati. Esistono due tipi principali di canali:
 \begin{itemize}
     \item \textbf{\ac{SVC}}: Limitati a 31 per connessione,
-    questi canali trasportano comunicazioni essenziali tra client e server, come il canale I/O o il canale utente. Vengono instaurati durante lo "Scambio delle Impostazioni di Base" e rimangono attivi per tutta la durata della sessione.
+    questi canali trasportano comunicazioni essenziali tra client e server, come il \emph{canale I/O} o il \emph{canale utente}. Vengono instaurati durante lo ``Scambio delle Impostazioni di Base'' e rimangono attivi per tutta la durata della sessione.
     \item \textbf{\ac{DCV}}: Trasportati su uno specifico \ac{SVC} (chiamato \emph{DRDYNVC}),
     i \ac{DCV}, a differenza degli \ac{SVC},
     possono essere creati e distrutti liberamente durante la sessione.
@@ -423,26 +407,30 @@ Questo scambio di dati avviene attraverso due modalità: \textit{slow-path} e \t
 \subsection{Parsec}
 \label{sec:parsec}
 Parsec è un software di desktop remoto focalizzato principalmente sul gaming. Rispetto alle tecnologie precedenti è ideato per ridurre al minimo la latenza tra il client e il server.
+
+La maggior parte delle informazioni contenute in questa sezione sono tratte da un articolo del co-fondatore di Parsec, Chris Dickson \footnote{\emph{The Technology Behind A Low Latency Cloud Gaming Service}: \url{https://parsec.app/blog/description-of-parsec-technology-b2738dcc3842}}.
+
 La capacità di offrire streaming video a bassa latenza, alta risoluzione e alto frame rate lo rende adatto non solo per il gaming ma anche per applicazioni professionali come l'editing video o la progettazione grafica.
+
 Nasce dall'idea di utilizzare istanze GPU di Amazon Web Services per lo streaming di giochi a bassa latenza su dispositivi meno potenti e successivamente si evolve in un servizio di desktop remoto completo.
 %
 A differenza di alcune tecnologie sopra citate,
-Parsec trasmette come flusso video un "mirror" del desktop dove è presente il server,
-permettendo di visualizzare l'intero ambiente desktop e non solo singole applicazioni. Quindi parsec si comporta come se dovesse trasmettere un video.
+Parsec trasmette come flusso video un mirror del desktop della macchina remota,
+permettendo di visualizzare l'intero ambiente desktop e non solo singole applicazioni.
 Aggiungendo la possibilità di trasmettere input da tastiera e mouse, il client può interagire con il server come se si trovasse fisicamente davanti ad esso.
 
-Il client Parsec è disponibile per Windows, macOS, Linux, Android, Raspberry Pi e web browser. Il server Parsec è disponibile per Windows e macOS. 
+Il client Parsec è disponibile per Windows, macOS, Linux, Android e web browser. Il server Parsec è disponibile per Windows e macOS. 
 
 \subsubsection{Procedura di Trasmissione e Visualizzazione}
 
 Il flusso di lavoro di Parsec per la trasmissione video si compone delle seguenti fasi:
-\begin{enumerate}
-    \item Cattura del frame
-    \item Compressione
-    \item Trasmissione
-    \item Decodifica
-    \item Rendering
-\end{enumerate}
+\begin{inlinelist}
+    \item Cattura del frame;
+    \item Compressione;
+    \item Trasmissione;
+    \item Decodifica;
+    \item Rendering.
+\end{inlinelist}
 
 \paragraph{Cattura del frame}
 Per la cattura del frame su Windows, Parsec utilizza la Desktop Duplication API (disponibile a partire da Windows 8.1),
@@ -458,6 +446,7 @@ La compressione software è eseguita dalla CPU, mentre la compressione hardware 
 Il vantaggio della compressione software è la compatibilità in quanto può essere eseguita su qualsiasi dispositivo, ma il suo svantaggio è il tempo impiegato per la compressione.
 La compressione hardware, al contrario, è molto più veloce ma richiede un chip dedicato, che non è sempre presente su tutti i dispositivi.
 %
+
 Parsec utilizza i codec H.264 e H.265, scelti per la loro ampia compatibilità hardware così da permettere compressione hardware per qualsiasi dispositivo relativamente recente.
 
 Per ridurre al minimo le latenza, Parsec è progettato per far si che il framebuffer,
@@ -470,22 +459,26 @@ Per garantire una connessione a bassa latenza, Parsec utilizza due connessione P
 Una volta ricevuto dal client, il frame compresso viene decodificato. Anche in questo caso Parsec predilige la decodifica hardware, sfruttando ASIC o GPU per ridurre al minimo la latenza.
 
 \paragraph{Rendering}
-L'ultimo passaggio della procedura è il rendering, che consiste nel visualizzare il frame decodificato sullo schermo del client. Parsec, per minimizzare i ritardi e garantire una visione fluida, utilizza la sincronizzazione verticale (V-sync) per allineare la visualizzazione del frame con il refresh rate del monitor, evitando problemi di tearing. Questo implica una sincronizzazione accurata tra i frame inviati dal server e il display del client.
+L'ultimo passaggio della procedura è il rendering, che consiste nel visualizzare il frame decodificato sullo schermo del client. Parsec, per garantire una visione fluida, utilizza la sincronizzazione verticale (V-sync) per allineare la visualizzazione del frame con il refresh rate del monitor, evitando problemi di tearing. Questo implica una sincronizzazione accurata tra i frame inviati dal server e il display del client.
 
 \subsubsection{Latenza}
 \label{sec:latenza-parsec}
 
-Come abbiamo detto, la sfida principale di Parsec è ridurre al minimo la latenza tra il client e il server. Eseguendo tutte le operazioni sulla GPU, evitando che la CPU sia coinvolta nella compressione e decompressione dei frame, Parsec riesce a ridurre la latenza a pochi millisecondi. Inoltre, utilizzando connessioni Peer-To-Peer UDP, Parsec evita i ritardi dovuti ai server intermedi, garantendo una connessione diretta tra client e host. Una limitazione che Parsec non può superare è la latenza intrinseca della rete, che può variare in base alla qualità della connessione e alla distanza geografica tra client e server. Fortunatamente negli ultimi anni la diffusione di connessioni ad alta velocità e a bassa latenza è aumentata notevolmente, sopratutto con l'aumento di connessioni Fiber To The Home (FTTH).
+Come abbiamo detto, la sfida principale di Parsec è ridurre al minimo la latenza tra il client e il server. Eseguendo tutte le operazioni sulla GPU, evitando che la CPU sia coinvolta nella compressione e decompressione dei frame, Parsec riesce a ridurre la latenza a pochi millisecondi. Inoltre, utilizzando connessioni Peer-To-Peer UDP, Parsec evita i ritardi dovuti ai server intermedi, garantendo una connessione diretta tra client e host. 
+
+Una limitazione che Parsec non può superare è la latenza intrinseca della rete, che può variare in base alla qualità della connessione e alla distanza geografica tra client e server. Fortunatamente negli ultimi anni la diffusione di connessioni ad alta velocità e a bassa latenza è aumentata notevolmente, sopratutto con l'aumento di connessioni Fiber To The Home (FTTH).
 
 \subsubsection{Altri Utilizzi}
 Grazie alla sua capacità di trasmettere video ad alta risoluzione e frame rate, Parsec è spesso utilizzato non solo per cloud gaming o desktop remoto Over The Internet, ma anche per Local Game Streaming. Questo consiste nell'avere una macchina potente da cui potersi collegare da altri dispositivi meno potenti, come una smart TV, così da poter avere un'esperienza di gioco di alta qualità su un dispositivo che altrimenti non sarebbe in grado di supportare i giochi più recenti.
 
 \subsection{Altre Tecnologie Rilevanti}
-Ci sono altri protocolli proprietari che meritano una menzione, come lo storico Team-Viewer o AnyDesk, che offrono funzionalità di desktop remoto per utenti meno esperti grazie ad un setup minimo evitando l'apertura di porte. Purtroppo le informazioni sul funzionamento di questi sono molto limitate e non è possibile approfondire ulteriormente.
+Ci sono altri protocolli proprietari che meritano una menzione, come lo storico \emph{Team-Viewer} o \emph{AnyDesk}, che offrono funzionalità di desktop remoto per utenti meno esperti grazie ad un setup minimo evitando l'apertura di porte. Purtroppo le informazioni sul funzionamento di questi sono molto limitate e non è possibile approfondire ulteriormente.
 
-Con la diffusione del local game streaming, sono nate altre tecnologie simili a Parsec, che offrono funzionalità simili ma con alcune differenze. Tra queste troviamo Steam Link (sviluppato da Valve), Rainway e Moonlight.
+Con la diffusione del local game streaming, sono nate altre tecnologie simili a Parsec, che offrono funzionalità simili ma con alcune differenze. Tra queste troviamo Steam Link (sviluppato da Valve), Rainway, Moonlight e Sunshine.
 
-NVIDIA, con la tecnologia Gamestream, permetteva di trasmettere il flusso video di un gioco da un computer con una GPU NVIDIA ad un dispositivo NVIDIA Shield. Per poter utilizzare questa funzione, e il server messo a disposizione dai driver NVIDIA, e ricevere questo flusso su ogni dispositivo, la community open-source ha sviluppato Moonlight, un client compatibile con qualsiasi dispositivo Android, iOS, Windows, macOS e Linux, in grado di ricevere il flusso video da un server NVIDIA Gamestream.
+Moonlight e Sunshine sono particolarmente interessanti in quanto sono due progetti open-source community-driven sviluppati in seguito alla rimozione del supporto per Gamestream da parte di NVIDIA.
+
+NVIDIA, con questa tecnologia, permetteva di trasmettere il flusso video di un gioco da un computer con una GPU NVIDIA ad un dispositivo NVIDIA Shield. Per poter utilizzare questa funzione, e il server messo a disposizione dai driver NVIDIA, e ricevere questo flusso su ogni dispositivo, la community open-source ha sviluppato Moonlight, un client compatibile con qualsiasi dispositivo Android, iOS, Windows, macOS e Linux, in grado di ricevere il flusso video da un server NVIDIA Gamestream.
 
 Quando nel 2022 NVIDIA ha deciso di rimuovere il supporto per i server Gamestream, la community ha sviluppato Sunshine, un server open-source in grado di trasmettere il flusso video di un gioco da un computer con una qualsiasi GPU (Gamestream era limitato a NVIDIA) ad un client Moonlight.
 Con il passare del tempo Sunshine è migliorato notevolmente, ed utilizzando un concetto molto simile a quello di Parsec, è in grado di ottenere latenze molto basse, rendendolo adatto non solo per il gaming, ma anche per applicazioni professionali. Inoltre la sua natura open-source e i continui impegni della community a migliorarlo, lo rendono migliore di molte soluzioni proprietarie. Sunshine infatti, rispetto a Parsec, è disponibile anche su Linux, oltre che su Windows e macOS. Supporta inoltre numerosi metodi di cattura e permette all'utente di modificare parametri come la qualità del video, la risoluzione e il frame rate, in base alle necessità e alla potenza del computer.
@@ -496,9 +489,9 @@ Con il passare del tempo Sunshine è migliorato notevolmente, ed utilizzando un 
 \label{chap:current-applications}
 % -- VDI, Cloud Gaming, Smart working, Assistenza Remota, DaaS, Applicazioni virtualizzate
 
-Negli ultimi anni, le tecnologie di desktop remoto si sono evolute da semplici strumenti per l’accesso remoto a sistemi aziendali fino a diventare soluzioni fondamentali in numerosi ambiti. Le applicazioni attuali delle tecnologie di desktop remoto non solo supportano i lavoratori e le aziende nella gestione delle loro operazioni quotidiane, ma sono diventate fondamentali anche per l’intrattenimento, soprattutto in ambito videoludico.
+Negli ultimi anni, le tecnologie di desktop remoto si sono evolute da semplici strumenti per l’accesso remoto a sistemi aziendali fino a diventare soluzioni fondamentali in numerosi ambiti. Le applicazioni attuali di queste tecnologie non solo supportano i lavoratori e le aziende nella gestione delle loro operazioni quotidiane, ma sono diventate fondamentali anche per l’intrattenimento, soprattutto in ambito videoludico.
 
-Questo capitolo esplora le principali applicazioni delle tecnologie di desktop remoto di cui si è parlato nel capitolo precedente, analizzando come queste tecnologie vengono utilizzate in diversi scenari e settori.
+Questo capitolo esplora le principali applicazioni delle tecnologie di desktop remoto di cui si è parlato nel capitolo precedente, analizzando come vengono utilizzate in diversi scenari e settori.
 
 %------------------------------------------------
 
@@ -515,8 +508,8 @@ Anche nel contesto domestico, l’assistenza remota è largamente impiegata per 
 
 \section{Infrastructure as a Service}
 \label{sec:iaas}
-Un possibile e diffuso utilizzo delle tecnologie di desktop remoto è il suo impiego all'interno di servizi di cloud computing, in particolare nell'ambito dell'\ac{IaaS}.
-Infrastructure as a Service è un termine che indica un modello di servizio dove un fornitore di servizi cloud mette a disposizione degli utenti risorse hardware virtualizzate, come server, reti, spazio di archiviazione e sistemi operativi, su richiesta. In poche parole permette all'utente di noleggiare un'infrastruttura IT completa, senza dover acquistare o gestire fisicamente hardware e strutture di rete.
+Un possibile e diffuso utilizzo delle tecnologie di desktop remoto è il suo impiego all'interno di servizi di cloud computing, in particolare nell'ambito dell'\emph{\ac{IaaS}}.
+IaaS è un termine che indica un modello di servizio dove un fornitore di servizi cloud mette a disposizione degli utenti risorse hardware virtualizzate, come server, reti, spazio di archiviazione e sistemi operativi, su richiesta. In poche parole permette all'utente di noleggiare un'infrastruttura IT completa, senza dover acquistare o gestire fisicamente hardware e strutture di rete.
 
 \subsection{Principali Caratteristiche di Infrastructure as a Service}
 Un provider di servizi \ac{IaaS} mette a disposizione dell'utente l'hardware (tipicamente virtualizzato), i servizi amministrativi per la gestione delle risorse e una piattaforma per poter eseguire applicativi (come sistemi operativi).
@@ -534,7 +527,7 @@ Questo porta a una serie di vantaggi per le aziende o gli utenti che ne fanno us
     \item \textbf{Ampio storage}: possibilità di archiviare grandi quantità di dati in modo scalabile;
     \item \textbf{Mantenimento semplificato}: il fornitore si occupa della manutenzione dell'hardware e degli aggiornamenti software (almeno quelli di base);
     \item \textbf{Accesso globale}: le risorse sono accessibili da qualsiasi luogo connesso a Internet tramite interfaccia web o applicativi dedicati.
-    \item \textbf{Flessibilità e scalabilità}: le risorse possono essere adattate alle esigenze specifiche dell'applicazione e aumentate o ridotte rapidamente;
+    \item \textbf{Flessibilità e scalabilità}: le risorse possono essere adattate alle esigenze specifiche dell'applicazione e aumentate o ridotte rapidamente.
 \end{itemize}
 
 \subsection{Provider e Cliente}
@@ -556,14 +549,14 @@ DaaS offre accessibilità da qualsiasi dispositivo, maggiore sicurezza dei dati 
 
 Rispetto ad una soluzione \ac{IaaS}, DaaS potrebbe essere meno flessibile per quanto riguarda la scelta del sistema operativo e applicazioni, ma guadagna in semplicità e immediatezza d'uso.
 Prendiamo in esempio un 3D artist che necessita di un ambiente di lavoro con una GPU potente per eseguire rendering complessi. Con una soluzione \ac{IaaS}, l'artista potrebbe configurare un server con una GPU dedicata e installare il software necessario. Con DaaS, invece, potrebbe accedere a un desktop virtuale già configurato con le specifiche richieste, senza dover gestire l'infrastruttura sottostante.
-Abbinando un sistema scalabile, immediato e on-demand come DaaS con una tecnologia di desktop remoto a bassa latenza, DaaS diventa un'alternativa competitiva rispetto all'acquisto di hardware fisico costoso e alla gestione di un'infrastruttura IT complessa.
+Abbinando un sistema scalabile, immediato e on-demand come DaaS con una tecnologia di desktop remoto a bassa latenza, questo diventa un'alternativa competitiva rispetto all'acquisto di hardware fisico costoso e alla gestione di un'infrastruttura IT complessa.
 
 Inoltre bisogna considerare che un utente può accedere al proprio desktop virtuale da qualsiasi dispositivo connesso a Internet.
 Poter accedere da un laptop in treno, successivamente dalla workstation in ufficio e infine dal tablet a casa senza mai perdere lo stato dell'ambiente di lavoro, è un vantaggio che non può essere sottovalutato, sopratutto in un'epoca in cui il lavoro remoto è sempre più diffuso.
 
 \section{Cloud Gaming}
 \label{sec:cloud-gaming}
-L'industria dei videogiochi ha visto una enorme crescita negli ultimi anni, sopratutto per quanto riguarda la potenza di calcolo richiesta per eseguire i videogiochi più recenti. Molti di questi, sopratutto i tripla A (termine utilizzato per indicare giochi con un budget di sviluppo molto alto), utilizzano modelli 3D complessi, texture ad alta risoluzione e tecnologie come il ray tracing\footnote{Il ray tracing è una tecnica di rendering che simula il comportamento della luce in modo molto realistico, permettendo di ottenere effetti di riflessione, rifrazione e ombreggiatura molto dettagliati. \url{https://w.wiki/BxAc}}, che migliorano notevolmente la qualità grafica ma richiedono una potenza di calcolo molto elevata.
+L'industria dei videogiochi ha visto una enorme crescita negli ultimi anni, sopratutto per quanto riguarda la potenza di calcolo richiesta per eseguire i videogiochi più recenti. Molti di questi, sopratutto i tripla A (o AAA, termine utilizzato per indicare giochi con un budget di sviluppo molto alto), utilizzano modelli 3D complessi, texture ad alta risoluzione e tecnologie come il ray tracing\footnote{Il ray tracing è una tecnica di rendering che simula il comportamento della luce in modo molto realistico, permettendo di ottenere effetti di riflessione, rifrazione e ombreggiatura molto dettagliati. \url{https://w.wiki/BxAc}}, che migliorano notevolmente la qualità grafica ma richiedono una potenza di calcolo molto elevata.
 Hardware in grado di supportare questi giochi può essere molto costoso, e non tutti gli utenti possono permettersi di acquistare una GPU di fascia alta o un computer con specifiche tecniche elevate.
 Per questo ed altri motivi che vedremo in seguito, il cloud gaming è diventato una soluzione sempre più popolare.
 Cloud Gaming, anche noto come \ac{GaaS}, è un servizio di cloud computing che permette agli utenti di giocare a videogiochi su server remoti, trasmettendo il flusso video del gioco a bassa latenza su dispositivi client di vario tipo. \cite{HARLE2023}
@@ -571,11 +564,11 @@ Cloud Gaming, anche noto come \ac{GaaS}, è un servizio di cloud computing che p
 \subsection{Principio di Funzionamento}
 \label{subsec:funzionamento}
 
-Il funzionamento del cloud gaming si basa sull'architettura del cloud computing, che permette di eseguire i giochi in remoto su server e di trasmettere in streaming il video generato all'utente finale. Questo servizio sfrutta i modelli di servizio \ac{IaaS}, PaaS e SaaS per offrire un servizio scalabile e facile da utilizzare.
+Il funzionamento del cloud gaming si basa sull'architettura del cloud computing, che permette di eseguire i giochi in remoto su server e di trasmettere in streaming il video generato all'utente finale. Questo servizio sfrutta i modelli di \ac{IaaS}, PaaS e SaaS per offrire un servizio scalabile e facile da utilizzare.
 
 \begin{itemize}
-    \item \textbf{Infrastruttura as a Service (IaaS)}: In GaaS, i provider utilizzano \ac{IaaS} per fornire l'infrastruttura hardware necessaria. Le risorse includono server con CPU e GPU potenti in grado di eseguire i giochi più "pesanti". Grazie a IaaS, i provider possono gestire dinamicamente l'allocazione delle risorse, adattandole in tempo reale alla domanda e ottimizzando i costi. Inoltre potendo distribuire i server in data center in tutto il mondo, è possibile ridurre la latenza e distribuire il carico in modo efficiente \cite{HARLE2023}.
-    \item \textbf{Platform as a Service (PaaS)}: PaaS può essere utilizzato dagli sviluppatori di videogiochi per avere un ambiente stabile e scalabile su cui sviluppare e testare i giochi senza doversi preoccupare dell'hardware sottostante. I provider forniscono piattaforme con librerie, strumenti e software necessari per lo sviluppo di giochi \cite{HARLE2023}.
+    \item \textbf{Infrastruttura as a Service (IaaS)}: In GaaS, i provider utilizzano \ac{IaaS} per fornire l'infrastruttura hardware necessaria. Le risorse includono server con CPU e GPU potenti in grado di eseguire i giochi più ``pesanti''. Grazie a IaaS, i provider possono gestire dinamicamente l'allocazione delle risorse, adattandole in tempo reale alla domanda e ottimizzando i costi. Inoltre potendo distribuire i server in data center in tutto il mondo, è possibile ridurre la latenza e distribuire il carico in modo efficiente \cite{HARLE2023};
+    \item \textbf{Platform as a Service (PaaS)}: PaaS può essere utilizzato dagli sviluppatori di videogiochi per avere un ambiente stabile e scalabile su cui sviluppare e testare i giochi senza doversi preoccupare dell'hardware sottostante. I provider forniscono piattaforme con librerie, strumenti e software necessari per lo sviluppo di giochi \cite{HARLE2023};
     \item \textbf{Software as a Service (SaaS)}: Quando si parla di cloud gaming, il livello SaaS è l'ultimo passo per fornire i giochi agli utenti finali. I servizi SaaS permettono all'utente di avviare un gioco direttamente dalla piattaforma di streaming (ad esempio dal browser o da un applicativo installato sul thin-client) senza bisogno di scaricare ed installare pesanti file di gioco. È proprio qui che le tecnologie di desktop virtuale e remoto entrano in gioco, permettendo di trasmettere il flusso video del gioco dal server IaaS al dispositivo dell'utente ed inviare input da tastiera e mouse al server \cite{HARLE2023}.
 \end{itemize}
 
@@ -585,9 +578,9 @@ Per ridurre al minimo la latenza, aumentare la qualità del video e garantire un
 Alcune di queste tecnologie includono:
 
 \begin{itemize}
-    \item \textbf{Streaming e Bitrate Adattivo}: Questa tecnologia permette di adattare la qualità del video in base allo scenario presente e alla larghezza di banda disponibile. È molto utile in situazioni in cui la connessione Internet è instabile, permettendo di mantenere un'esperienza di gioco fluida anche in presenza di fluttuazioni della larghezza di banda.
-    \item \textbf{Codec H.264 e H.265}: Questi codec sono utilizzati per comprimere il flusso video in modo efficiente, riducendo la quantità di dati trasmessi e garantendo una qualità video elevata. Vedi \ref{sec:compressione}.
-    \item \textbf{QUIC}: Quick UDP Internet Connections (QUIC) è un protocollo di trasporto sviluppato da Google che permette di ridurre la latenza e migliorare la sicurezza delle connessioni Internet. Queste caratteristiche lo rendono particolarmente adatto per il cloud gaming.
+    \item \textbf{Streaming e Bitrate Adattivo}: Questa tecnologia permette di adattare la qualità del video in base allo scenario presente e alla larghezza di banda disponibile. È molto utile in situazioni in cui la connessione Internet è instabile, permettendo di mantenere un'esperienza di gioco fluida anche in presenza di fluttuazioni della larghezza di banda\cite{HARLE2023};
+    \item \textbf{Codec H.264 e H.265}: Questi codec sono utilizzati per comprimere il flusso video in modo efficiente, riducendo la quantità di dati trasmessi e garantendo una qualità video elevata. Vedi \ref{sec:compressione} \cite{HARLE2023};
+    \item \textbf{QUIC}: Quick UDP Internet Connections (QUIC) è un protocollo di trasporto sviluppato da Google che permette di ridurre la latenza e migliorare la sicurezza delle connessioni Internet. Queste caratteristiche lo rendono particolarmente adatto per il cloud gaming\cite{HARLE2023}.
 \end{itemize}
 
 \subsection{Vantaggi e Svantaggi}
@@ -649,8 +642,7 @@ Il 5G è la quinta generazione di tecnologia per le reti cellulari che promette 
 \subsection{Miglioramenti nelle Prestazioni del Desktop Remoto}
 
 Le reti 5G offrono una serie di vantaggi rispetto alle tecnologie precedenti, come il 4G. Promettono latenze più basse rispetto alle reti 4G, fino a 1 ms, e velocità di trasmissione fino a 10 Gbps \cite{Dangi2021}. 
-
-Le reti 5G, con la loro capacità di fornire latenze estremamente ridotte e velocità di trasmissione fino a 20 Gbps, possono migliorare notevolmente le applicazioni di desktop remoto in ambiti professionali, educativi e di intrattenimento. In particolare, il supporto alle comunicazioni ultra-affidabili e a bassa latenza (URLLC) permette di ottenere una maggiore fluidità nell’interazione, rendendo l’esperienza di utilizzo simile a quella offerta da una connessione locale \cite{Dangi2021, Sahu2024}. Questo potrebbe risolvere o ridurre significativamente i problemi di cui parlavamo in \ref{sec:latenza-parsec}.
+Queste caratteristiche possono migliorare notevolmente le applicazioni di desktop remoto in ambiti professionali, educativi e di intrattenimento. In particolare, il supporto alle comunicazioni ultra-affidabili e a bassa latenza (URLLC) permette di ottenere una maggiore fluidità nell’interazione, rendendo l’esperienza di utilizzo simile a quella offerta da una connessione locale \cite{Dangi2021, Sahu2024}. Questo potrebbe risolvere o ridurre significativamente i problemi di cui parlavamo in \ref{sec:latenza-parsec}.
 
 Il 5G introduce inoltre un'architettura basata su tecnologie come Massive MIMO (Multiple Input Multiple Output) e il beamforming, che consentono di migliorare la copertura e la capacità della rete, riducendo l'interferenza e migliorando la qualità della connessione in ambienti densi di dispositivi \cite{Dangi2021}. Grazie a questi sviluppi, le applicazioni di desktop remoto possono beneficiare di connessioni più stabili e reattive, anche in situazioni di mobilità o in aree metropolitane densamente popolate.
 
@@ -660,13 +652,13 @@ Infatti attualmente l'utilizzo di desktop remoto in mobilità è limitato dalla 
 
 Oltre alle prestazioni, il 5G introduce nuove sfide e opportunità per la sicurezza delle applicazioni di desktop remoto. Le reti 5G devono affrontare rischi legati alla sicurezza, come gli attacchi informatici e la protezione della privacy, soprattutto considerando l’elevato numero di dispositivi e connessioni simultanee. Tuttavia, le funzionalità avanzate di slicing di rete offerte dal 5G permettono di creare segmenti di rete virtuali con requisiti di sicurezza specifici per le applicazioni di desktop remoto, rendendo possibile una gestione più efficace delle risorse e una maggiore protezione dei dati sensibili \cite{Dangi2021}.
 
-La sicurezza rimane dunque un aspetto critico, poiché le applicazioni di desktop remoto richiedono un livello elevato di protezione per prevenire accessi non autorizzati e garantire l'integrità dei dati. Le reti 5G possono sfruttare tecniche avanzate come l'autenticazione basata su AI e la crittografia end-to-end per aumentare la sicurezza dei sistemi remoti \cite{Sahu2024}.
+La sicurezza rimane dunque un aspetto critico, poiché le applicazioni di desktop remoto richiedono un livello elevato di protezione per prevenire accessi non autorizzati e garantire l'integrità dei dati. Le reti 5G possono sfruttare tecniche avanzate come la crittografia end-to-end per aumentare la sicurezza dei sistemi remoti \cite{Sahu2024}.
 
 %----------------------------------------------
 
 \section{Applicazioni del Desktop Remoto in Virtual Reality e Augmented Reality}
 
-La virtual reality (VR) e la augmented reality (AR) sono due tecnologie innovative nell'interazione uomo-macchina. La VR permette di immergere completamente l'utente in un ambiente digitale simulato, isolando l'utente dal mondo fisico. L'AR, invece, sovrappone elementi digitali al mondo reale, aumentando, per l'appunto, la realtà, integrando informazioni digitali con l'ambiente fisico circostante. Gli \textit{Head-Worn Displays} (HWD), sono dispositivi indossabili che proiettano contenuti direttamente nel campo visivo dell'utente, costituiscono il fulcro di queste applicazioni \cite{pavanatto2021, frontiers2023}.
+La Virtual Reality (VR) e la Augmented Reality (AR) sono due tecnologie innovative nell'interazione uomo-macchina. La VR permette di immergere completamente l'utente in un ambiente digitale simulato, isolando l'utente dal mondo fisico. L'AR, invece, sovrappone elementi digitali al mondo reale, aumentando, per l'appunto, la realtà, integrando informazioni digitali con l'ambiente fisico circostante. Gli \textit{Head-Worn Displays} (HWD), sono dispositivi indossabili che proiettano contenuti direttamente nel campo visivo dell'utente, costituiscono il fulcro di queste applicazioni \cite{pavanatto2021, frontiers2023}.
 
 \subsection{Integrazione di Desktop Virtuali in Virtual Reality e Augmented Reality}
 
@@ -675,10 +667,10 @@ Un'applicazione promettente delle tecnologie di VR e AR è l'integrazione con i 
 \begin{figure}
     \centering
     \includegraphics[width=.4\linewidth]{figures/virtual_monitors.jpg}
-    \caption[xarch]{Esempio di tre modalità di visualizzazione di monitor. Dall'alto verso il basso: tre monitor fisici, tre monitor virtuali, un monitor fisico e due virtuali. Fonte \cite{pavanatto2021}}
+    \caption[xarch]{Esempio di tre modalità di visualizzazione di monitor. Dall'alto verso il basso: tre monitor fisici, tre monitor virtuali, un monitor fisico e due virtuali \cite{pavanatto2021}.}
 \end{figure}
 
-I monitor virtuali offrono diversi vantaggi teorici. In primo luogo, eliminano i vincoli fisici dei monitor tradizionali, fornendo all'utente un'area di lavoro completamente personalizzabile. Questi possono essere personalizzati a piacere, modificando grandezza, proporzione, distanza e posizione. Potenzialmente possono essere aggiunti un numero infinito di monitor, permettendo all'utente di avere un'area di lavoro molto più grande di quella fisica.
+I monitor virtuali offrono diversi vantaggi teorici. In primo luogo, eliminano i vincoli fisici dei monitor tradizionali, fornendo all'utente un'area di lavoro completamente personalizzabile. Questi possono essere configurabili a piacere, modificando grandezza, proporzione, distanza e posizione. Potenzialmente possono essere aggiunti un numero infinito di monitor, permettendo all'utente di avere un'area di lavoro molto più grande di quella fisica.
 L'adozione di HWD può permettere di abbattere i costi in quanto il costo monetario non scala proporzionalmente rispetto al numero di monitor utilizzati come invece accadrebbe con l'utilizzo di monitor fisici \cite{frontiers2023}.
 
 Inoltre, i monitor virtuali possono aumentare la privacy e la sicurezza, poiché il contenuto proiettato è visibile solo all'utente che indossa l'HWD \cite{pavanatto2021}.
@@ -689,7 +681,7 @@ Inoltre, il design ergonomico degli HWD gioca un ruolo cruciale: molti dispositi
 
 Con l'avanzare della tecnologia, questi problemi potrebbero essere risolti, tramite l'utilizzo di headset più leggeri ed ergonomici, con l'aumento del framerate e della risoluzione. Bisogna inoltre sottolineare come l'esperienza utente sia estremamente soggettiva, e individui meno sensibili potrebbero non riscontrare questi problemi con i dispositivi attualmente disponibili.
 
-Alla luce di quanto esposto anche in questo contesto, le tecnologie di desktop remoto possono giocare un ruolo cruciale al fine di fornire un'esperienza utente ottimale. L'utilizzo di dispositivi VR standalone come il Meta Quest 3, combinati con soluzioni di desktop remoto a bassa latenza, permetterebbe il controllo di un computer connesso da qualsiasi luogo. In combinazione ad altre tecnologie come le reti 5G \ref{sec:5g}, l'adozione di HWD potrebbe permettere agli utenti l'utilizzo di setup multi-schermo virtuale in mobilità, ad esempio durante viaggi o spostamenti.
+Alla luce di quanto esposto anche in questo contesto, le tecnologie di desktop remoto possono giocare un ruolo cruciale al fine di fornire un'esperienza utente ottimale. L'utilizzo di dispositivi VR standalone come il Meta Quest 3, combinati con soluzioni di desktop remoto a bassa latenza, permetterebbe il controllo di un computer connesso da qualsiasi luogo senza la necessità di un computer fisico \cite{frontiers2023}. In combinazione ad altre tecnologie come le reti 5G \ref{sec:5g}, l'adozione di HWD potrebbe permettere agli utenti l'utilizzo di setup multi-schermo virtuale in mobilità, ad esempio durante viaggi o spostamenti.
 
 %----------------------------------------------
 
@@ -738,7 +730,7 @@ Questi ci permettono di superare i limiti fisici degli attuali setup, permettend
 
 \backmatter
 
-\bibliographystyle{acm}
+\bibliographystyle{unsrt}
 \bibliography{bibliography}    
 
 \begin{acknowledgements} % this is optional
